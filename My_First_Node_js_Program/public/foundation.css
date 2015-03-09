@@ -6199,3 +6199,17 @@ th.hide-for-touch {
 
   th.show-for-print {
     display: table-cell !important; } }
+/* My Css */
+#name{
+
+  color:#B23AEE;
+}
+a{
+
+  color:white;
+}
+li > a:hover{
+
+  color:#B23AEE;
+
+}
