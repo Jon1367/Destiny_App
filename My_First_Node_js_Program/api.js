@@ -1,8 +1,10 @@
 var unirest = require("unirest");
 var home = require('./hello.js');
-var characterOne = [];
+
 
 exports.apiOne = function(system,gamerTag,callback){
+
+	var system;
 
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
     .type('json')
@@ -13,18 +15,26 @@ exports.apiOne = function(system,gamerTag,callback){
        console.log(data);
        gamerTag = data["Response"][0]["displayName"];
        membershipId = data["Response"][0]["membershipId"];
+       systemType = data["Response"][0]["membershipType"];
 
-       	unirest.get('http://www.bungie.net/Platform/Destiny/TigerPSN/Account/'+membershipId+'')
+       if(systemType = 2){
+
+       	system = 'TigerPSN';
+       }else if(systemType = 1){
+       	system = "TigerXbox";
+       }
+
+       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
 		.type('json')
 		.end(function (response) {
 			console.log('data2');
 			console.log(response.body);
 
        		var data2 = response.body;
-			characterOne = data2['Response']['data']['characters'];
+			var characters = data2['Response']['data']['characters'];
 	//  //    characterTwo = data['Response']['data']['characters'][1];
 	//  //    characterThree = data['Response']['data']['characters'][2];
-			callback(characterOne);
+			callback(characters);
 
 		});
 

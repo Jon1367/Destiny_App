@@ -183,7 +183,8 @@ app.post('/processApi', function(req, res) {
 
 
 		// console.log(characterOne[]);
-		res.render('./views/profile',{characterOne : characterOne,
+		res.render('./views/profile',{gamerTag:gamerTag,
+			characterOne : characterOne,
 			characterTwo:characterTwo,
 			characterThree : characterThree
 
