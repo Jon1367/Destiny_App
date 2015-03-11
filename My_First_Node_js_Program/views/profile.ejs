@@ -17,115 +17,117 @@
 <h1>hello,</h1>
 <h2><%= gamerTag %></h2>
 <br>
+<form action="/apiTwo", method="POST">
+<select name="character" id="">
+	<!-- Character One info  -->
+	<option value="0">
+	 <h2> <%= characterOne['characterId'] %> </h2>
+	 <h2> <%= characterOne['powerLevel'] %> </h2>
+	 <h2> <%= characterOne['raceHash'] %> </h2>
+	 <h2> <%= characterOne['classHash'] %> </h2>
+	 <h2> <%= characterOne['genderType'] %> </h2>
 
-<!-- Character One info  -->
- <h2> <%= characterOne['characterId'] %> </h2>
- <h2> <%= characterOne['powerLevel'] %> </h2>
- <h2> <%= characterOne['raceHash'] %> </h2>
- <h2> <%= characterOne['classHash'] %> </h2>
- <h2> <%= characterOne['genderType'] %> </h2>
-
-<!-- Check Race -->
-<p><b>Race: </b>
-<% if(characterOne['raceHash'] == '3887404748'){ %>
-Human
-<% } else if(characterOne['raceHash'] == '898834093'){ %>  
-Exo
-<% } else { %>
-Awoken
-<% } %>
-</p>
-<!-- Check Class-->
-<p><b>Class: </b>
-	<% if(characterOne['classHash'] == '3655393761'){ %>
-            Titan
-	<% } else if(characterOne['classHash'] == '2271682572'){ %>  
-            Warlock
+	<!-- Check Race -->
+	<p><b>Race: </b>
+	<% if(characterOne['raceHash'] == '3887404748'){ %>
+	Human
+	<% } else if(characterOne['raceHash'] == '898834093'){ %>  
+	Exo
 	<% } else { %>
-            Hunter
-    <% } %>
-</p>
-<!-- Chech Gender -->
-<p><b>Sex: </b>
-    <% if(characterOne['genderType'] == 0){ %>
-            male
+	Awoken
+	<% } %>
+	</p>
+	<!-- Check Class-->
+	<p><b>Class: </b>
+		<% if(characterOne['classHash'] == '3655393761'){ %>
+	            Titan
+		<% } else if(characterOne['classHash'] == '2271682572'){ %>  
+	            Warlock
+		<% } else { %>
+	            Hunter
+	    <% } %>
+	</p>
+	<!-- Chech Gender -->
+	<p><b>Sex: </b>
+	    <% if(characterOne['genderType'] == 0){ %>
+	            male
+		<% } else { %>  
+	            female
+	<% } %>
+	</p>
+	 </option>
+
+	<!-- Character Two info  -->
+	<option value="1">
+	 <h2> <%= characterTwo['characterId'] %> </h2>
+	 <h2> <%= characterTwo['powerLevel'] %> </h2>
+	 <h2> <%= characterTwo['raceHash'] %> </h2>
+	<!-- Check Race -->
+	<p><b>Race: </b>
+	 <% if(characterTwo['raceHash'] == '3887404748'){ %>
+	Human
+	<% } else if(characterTwo['raceHash'] == '898834093'){ %>  
+	Exo
+	<% } else { %>
+	Awoken
+	<% } %>
+	</p>
+	 <!-- Check Class-->
+	<p><b>Class: </b>
+		<% if(characterTwo['classHash'] == '3655393761'){ %>
+	            Titan
+		<% } else if(characterTwo['classHash'] == '2271682572'){ %>  
+	            Warlock
+		<% } else { %>
+	            Hunter
+	    <% } %>
+	</p>
+	 <!-- check Gender -->
+	<p><b>Sex: </b>
+	    <% if(characterTwo['genderType'] == 0){ %>
+	            male
 	<% } else { %>  
-            female
-<% } %>
-</p>
- 
+	            female
+	<% } %>
+	</p>
+	</option>
 
-<!-- Character Two info  -->
- <h2> <%= characterTwo['characterId'] %> </h2>
- <h2> <%= characterTwo['powerLevel'] %> </h2>
- <h2> <%= characterTwo['raceHash'] %> </h2>
-<!-- Check Race -->
-<p><b>Race: </b>
- <% if(characterTwo['raceHash'] == '3887404748'){ %>
-Human
-<% } else if(characterTwo['raceHash'] == '898834093'){ %>  
-Exo
-<% } else { %>
-Awoken
-<% } %>
-</p>
- <!-- Check Class-->
-<p><b>Class: </b>
-	<% if(characterTwo['classHash'] == '3655393761'){ %>
-            Titan
-	<% } else if(characterTwo['classHash'] == '2271682572'){ %>  
-            Warlock
+	<!-- Character Three info  -->
+	<option value="2">
+	 <h2> <%= characterThree['characterId'] %> </h2>
+	 <h2> <%= characterThree['powerLevel'] %> </h2>
+	 <h2> <%= characterThree['raceHash'] %> </h2>
+
+	<p><b>Race: </b>
+	<% if(characterThree['raceHash'] == '3887404748'){ %>
+	Human
+	<% } else if(characterThree['raceHash'] == '898834093'){ %>  
+	Exo
 	<% } else { %>
-            Hunter
-    <% } %>
-</p>
- <!-- check Gender -->
-<p><b>Sex: </b>
-    <% if(characterTwo['genderType'] == 0){ %>
-            male
-<% } else { %>  
-            female
-<% } %>
-</p>
+	 Awoken
+	<% } %>
+	 
+	<p><b>Class: </b>
+		<% if(characterThree['classHash'] == '3655393761'){ %>
+	            Titan
+		<% } else if(characterThree['classHash'] == '2271682572'){ %>  
+	            Warlock
+		<% } else { %>
+	            Hunter
+	    <% } %>
+	</p>
+	<p><b>Sex: </b>
+	    <% if(characterThree['genderType'] == 0){ %>
+	            male
+	<% } else { %>  
+	            female
+	<% } %>
+	</p>
 
-<!-- Character Three info  -->
- <h2> <%= characterThree['characterId'] %> </h2>
- <h2> <%= characterThree['powerLevel'] %> </h2>
- <h2> <%= characterThree['raceHash'] %> </h2>
-
-<p><b>Race: </b>
-<% if(characterThree['raceHash'] == '3887404748'){ %>
-Human
-<% } else if(characterThree['raceHash'] == '898834093'){ %>  
-Exo
-<% } else { %>
- Awoken
-<% } %>
- 
-<p><b>Class: </b>
-	<% if(characterThree['classHash'] == '3655393761'){ %>
-            Titan
-	<% } else if(characterThree['classHash'] == '2271682572'){ %>  
-            Warlock
-	<% } else { %>
-            Hunter
-    <% } %>
-</p>
-<p><b>Sex: </b>
-    <% if(characterThree['genderType'] == 0){ %>
-            male
-<% } else { %>  
-            female
-<% } %>
-    </p>
-
-
-
-
- 
-
-
-
-</body>
+	</option>
+</slect>
+		<input type="submit">
+		</form>
+	</body>
 </html>
 

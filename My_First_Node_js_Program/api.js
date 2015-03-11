@@ -18,11 +18,13 @@ exports.apiOne = function(system,gamerTag,callback){
        systemType = data["Response"][0]["membershipType"];
 
        if(systemType = 2){
-
        	system = 'TigerPSN';
        }else if(systemType = 1){
        	system = "TigerXbox";
        }
+       console.log(systemType);
+       console.log(system);
+       console.log(membershipId);
 
        	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
 		.type('json')
@@ -32,8 +34,8 @@ exports.apiOne = function(system,gamerTag,callback){
 
        		var data2 = response.body;
 			var characters = data2['Response']['data']['characters'];
-	//  //    characterTwo = data['Response']['data']['characters'][1];
-	//  //    characterThree = data['Response']['data']['characters'][2];
+	 //    characterTwo = data['Response']['data']['characters'][1];
+	 //    characterThree = data['Response']['data']['characters'][2];
 			callback(characters);
 
 		});
@@ -43,18 +45,28 @@ exports.apiOne = function(system,gamerTag,callback){
  
     
 };
+exports.apiTwo = function(membershipId,characterId,callback){
 
+    unirest.get('http://www.bungie.net/Platform/Destiny/2/Account/'+membershipId+'/Character/'+characterId+'/Inventory/')
+    .end(function (res) {
+        
+        var temp = res.body;
+        callback(temp)
+        
+    });
+};
 
-// exports.apiTwo = function (membershipId) {
-// 	unirest.get('http://www.bungie.net/Platform/Destiny/TigerPSN/Account/'+membershipId+'')
-//     .type('json')
-//     .end(function (response) {
-//        //console.log(response.body);
-//        data = response.body;
-//        // gamerTag = data["Response"][0]["displayName"];
-//        // membershipId = data["Response"][0]["membershipId"];
-//     });
-// };
-//console.log(apiOne);
-//module.exports.x = apiOne;
+exports.apiTwo = function(type,id,callback){
+
+	//    /Manifest/{type}/{id}/
+
+    unirest.get('http://www.bungie.net/Platform/Destiny/'+type+'/'+id+'')
+    .end(function (res) {
+        
+        var temp = res.body;
+        callback(temp)
+        
+    });
+
+};
 
