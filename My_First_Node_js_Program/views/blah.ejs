@@ -1,0 +1,27 @@
+                <span class="lvl"><b><%=character['characterLevel']%></b> </span>
+
+                <span class="gsc"><%=character['characterBase']['grimoireScore']%>  </span>
+
+                <span class="cls"><% if(character['characterBase']['classHash'] == '3655393761'){ %>
+	                Titan
+		        <% } else if(characterOne['characterBase']['classHash'] == '2271682572'){ %>  
+	                Warlock
+		        <% } else { %>
+	                Hunter
+	            <% } %> </span>
+
+
+                <span class="rceGndr"><% if(character['characterBase']['raceHash'] == '3887404748'){ %>
+                    Human
+                <% } else if(character['characterBase']['raceHash'] == '898834093'){ %>  
+                    Exo
+                <% } else { %>
+                    Awoken
+                <% } %>
+                
+                
+                <% if(character['characterBase']['genderType'] == 0){ %>
+	                Male
+		        <% } else { %>  
+	                Female
+	            <% } %></span>

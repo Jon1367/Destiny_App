@@ -6199,17 +6199,105 @@ th.hide-for-touch {
 
   th.show-for-print {
     display: table-cell !important; } }
+
+
 /* My Css */
-#name{
-
-  color:#B23AEE;
+a[class='purp'] {
+  color:#B23AEE !important;
 }
-a{
 
+button[id='purple'] {
+    background-color: #B23AEE;
+}
+nav {
+    margin-bottom: 60px !important;
+}
+a {
   color:white;
 }
+
 li > a:hover{
-
   color:#B23AEE;
+}
 
+.showme {
+    border: 1px solid black;   
+}
+
+
+/*CHARACTER CHOICES STYLING*/
+input[id='imageIcon1']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='imageIcon2']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='imageIcon3']{
+    visibility: hidden;
+    position: absolute;
+}
+.imageBorder {
+    display: block;
+    position: relative;
+}
+.cls {
+    font-size: 18px;
+    color: White;
+    position: absolute;
+    top: 6px;
+    left: 72px;
+}
+.rceGndr {
+    font-size: 14px;
+    color: White;
+    position: absolute;
+    top: 32px;
+    left: 72px;
+}
+.lvl {
+    color: yellow;
+    position: absolute;
+    top: 8px;
+    left: 338px;
+}
+.gsc {
+    color: white;
+    position: absolute;
+    top: 32px;
+    left: 322px;
+}
+div > label {
+     margin-bottom: 20px !important;   
+}
+.error {
+     margin-bottom: 40px;   
+}
+
+body {
+     background-color: #9d9d9d;   
+}
+
+footer {
+    font-size: 13px;
+    background-color: rgb(51,51,51);
+    color: #B23AEE;
+}
+.moveDown {
+     margin-bottom: 30px;   
+}
+.grayOut {
+     color: #4b4b4b;   
+}
+
+
+input[id='imageIcon1']:checked + label[for='imageIcon1'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='imageIcon2']:checked + label[for='imageIcon2'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='imageIcon3']:checked + label[for='imageIcon3'] > div{
+  border:3px solid #B23AEE !important;
 }

@@ -1,6 +1,9 @@
 var unirest = require("unirest");
 var home = require('./hello.js');
 
+function isEmptyObject(data) {
+    return !Object.keys(data["Response"]).length;   
+};
 
 exports.apiOne = function(system,gamerTag,callback){
 
@@ -9,28 +12,39 @@ exports.apiOne = function(system,gamerTag,callback){
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
     .type('json')
     .end(function (response) {
-       //console.log(response.body);
+        
+        
+       //console.log(response.body)p;
        data = response.body;
-   	   console.log('Data One');
-       console.log(data);
-       gamerTag = data["Response"][0]["displayName"];
-       membershipId = data["Response"][0]["membershipId"];
-       systemType = data["Response"][0]["membershipType"];
+        console.log('length');
+       console.log(typeof(data));
+        console.log(data);
 
-       if(systemType = 2){
-       	system = 'TigerPSN';
-       }else if(systemType = 1){
-       	system = "TigerXbox";
-       }
-       console.log(systemType);
-       console.log(system);
-       console.log(membershipId);
+        if (isEmptyObject(data) == true) {
+            callback(55);
+            return false;      
+        } else {
+        
+           gamerTag = data["Response"][0]["displayName"];
+           membershipId = data["Response"][0]["membershipId"];
+           systemType = data["Response"][0]["membershipType"];
+
+           if(systemType = 2){
+            system = 'TigerPSN';
+           }else if(systemType = 1){
+            system = "TigerXbox";
+           }
+           console.log(systemType);
+           console.log(system);
+           console.log(membershipId);
+        }
+
 
        	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
 		.type('json')
 		.end(function (response) {
-			console.log('data2');
-			console.log(response.body);
+//			console.log('data2');
+//			console.log(response.body);
 
        		var data2 = response.body;
 			var characters = data2['Response']['data']['characters'];
@@ -69,4 +83,8 @@ exports.apiTwo = function(type,id,callback){
     });
 
 };
+
+
+
+
 

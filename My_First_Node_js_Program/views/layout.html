@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Desteny Character Explore</title>
+	<title>Destiny Character Explorer</title>
 	<link rel="stylesheet" href="/foundation.css" type="text/css">
 </head>
 <body>
  <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
-			<h1 id="name">Destieny Character </h1>
+            <h1><a href="#" class="purp">Destiny Character Explorer</a></h1>
 		</li>
 	</ul>
 
 	<nav>
 		<section class="top-bar-section">
 			<ul class="right ">
-				<li><a href="/login">Login</a></li>
-				<li><a href="/views">Home</a></li>
-				<li><a href="/api">API</a></li>
-				<li><a href="/auth/facebook">FaceBook Login</a></li>
+				<li><a class="purp" href="/login">Login</a>                </li>
+				<li><a class="purp" href="/auth/facebook">FaceBook Login</a></li>
+				<li><a class="purp" href="/addUser">Register</a>
+                </li>
+                <li><a class="purp" href="/logout">Logout</a>
+                    </li>
 
 			</ul>	
 		</section>
@@ -27,19 +29,31 @@
 </nav>
 
 
-	<form action="/processApi" method="POST">
+<div class="row">
+    <div class="small-9 small-centered columns">
+       <h2 class="grayOut">Enter Player Info</h2>
+        <form action="/processApi" method="POST">
 
-	<input type="text" name="gamerTag">
+           <label>Enter Playstation Id  /  Gamertag</label>
+            <input type="text" name="gamerTag">
 
-	<select name="system">
-		<option value="2">PS4</option>
-		<option value="1">XboxOne</option>
-	</select>
+           <label for="system">Choose Platform</label>
+            <select name="system">
+                <option value="2">PS4</option>
+                <option value="1">XboxOne</option>
+            </select>
 
-	<input type="submit">	
-		
-	</form>
-	
+            <button class="button small radius" id="purple" type="submit">Submit</button>
+
+        </form>
+    </div>
+</div>
+
+
+    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
+        <div>|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
+    </footer>
+
 
 </body>
 </html>

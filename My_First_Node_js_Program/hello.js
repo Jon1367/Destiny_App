@@ -27,6 +27,7 @@ var characterOne = [];
 var characterTwo = [];
 var characterThree = [];
 
+var character;
 // Face Book
 // AppId: 804379889616035
 // AppSerect: 3662bc272f3c540efa827618188e17a5
@@ -103,7 +104,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 }));
 
 app.get('/success', function(req, res, next) {
-  res.send('Successfully logged in.');
+  res.redirect('/');
 });
  
 app.get('/error', function(req, res, next) {
@@ -119,18 +120,28 @@ app.post('/processLogin', function(req, res) {
 
 	sess = req.session;
 	sess.name = name;
-
+	sess.bool = true;
+    
 	connection.connect();
 	// SQL Query
  	connection.query('SELECT username from users where username = ? and password = ?',[name,password],function(err, rows) {
    		console.log("hello"); 
    		console.log(rows);
-	 });
- 	connection.end();	
-    //res.render('layout');
-     res.send('<p> '+  sess.name + password +'</p>');
 
+	 });
+ 	connection.end();
+    
+    res.redirect('/');
+
+     
 });
+
+app.get('/logout', function(req, res) {
+    sess = null;
+    
+    res.redirect('/')
+});
+
 
 // Proccessing Apis
 app.post('/processApi', function(req, res) {
@@ -145,85 +156,114 @@ app.post('/processApi', function(req, res) {
 	console.log(system);
 
 
+    
 	api.apiOne(system,gamerTag,function(result){
 
+        console.log(typeof(result));
+//        console.log(result);
+        
+        if (result == 55) {
+            res.render('./views/errors');       
+        } else {
+        
 		data = result;
-		console.log(data);
+//		console.log(data);
+        
 
 		membershipId = data[0]['characterBase']['membershipId'];
-		characterOne = data[0]['characterBase'];
-		characterTwo = data[1]['characterBase'];
-		characterThree = data[2]['characterBase'];
+		characterOne = data[0];
+		characterTwo = data[1];
+		characterThree = data[2];
 
-		console.log(characterOne);
-		console.log(characterTwo);
-		console.log(characterThree);
+//		console.log(characterOne);
+//		console.log(characterTwo);
+//		console.log(characterThree);
 
 
 		res.render('./views/profile',{gamerTag:gamerTag,
 			characterOne : characterOne,
 			characterTwo:characterTwo,
 			characterThree : characterThree
+                                     });
+        }
+                   
 
 		});
-
 	});
 
 
-});
-app.post('/apiTwo', function(req, res) {
+app.post('/viewCharacter', function(req, res) {
 
-	var character = req.body.character;
+	 characterchoose = req.body.character;
 
-	console.log(characterOne['characterId']);
-	console.log(characterTwo['characterId']);
-	console.log(characterThree['characterId']);
+	console.log(character);
 
 
 
-	if (character = 0) {
 
-		characterId = characterOne['characterId'];
-		console.log('character One');
+	if (characterchoose == 0) {
+		character = characterOne;
+		res.redirect('/chooseCharacter');
 
-	}else if(character = 1){
+	}else if(characterchoose == 1){
+		character = characterTwo;
+		res.redirect('/chooseCharacter');
 
-		characterId = characterTwo['characterId'];
-		console.log('characterTwo');
-
-		api.apiTwo(membershipId,characterId,function(result){
-
-		//res.send(result);
-
-		//  Response   data  buckets   Equippable  items  itemHash
-		res.send(result['Response']);
-
-		});
-
-
-	}else if(character = 2){
-
-		characterId = characterThree['characterId'];
-		console.log('character Three');
-
-
+	}else if(characterchoose == 2){
+		character = characterThree;
+		res.redirect('/chooseCharacter');
 	}
 
+});
+app.get('/chooseCharacter', function(req, res) {
 
-	// console.log('character');
-	// console.log(character);
-	// console.log('membershipId');
-	// console.log(membershipId);
-	// console.log('Characters');
-	// console.log(characterOne);
-	// console.log(characterTwo);
-	// console.log(characterThree);
+	console.log(character);
+
+	res.render('./views/charView',{character:character});
+
+});
+app.get('/addUser', function(req, res) {
+
+	res.render('./views/addUser');
+
+});
 
 
+app.post('/processAdd', function(req, res) {
+
+	 var name = req.body.name;
+	 var password = req.body.password;
+     var gamertag = req.body.gamertag;
+	 var system = req.body.system;
+
+//	 sess = req.session;
+//	 sess.name = name;
+
+	connection.connect();
+	// SQL Query
+ 	connection.query('insert into users(username,password,gamertag,system)values(?,?,?,?)',[name,password,gamertag,system],function(err, rows) {
+   		console.log("hello"); 
+   		console.log(rows);
+	 });
+
+ 	connection.end();
+
+    res.redirect('/');
 
 
 });
+
+app.get('/back', function(req, res) {
+
+	
+	res.render('./views/profile',{gamerTag:gamerTag,
+			characterOne : characterOne,
+			characterTwo:characterTwo,
+			characterThree : characterThree
+                                     });
+
+});
+
+
 app.listen(8080);
-
 console.log("Listening on port 8080");
-

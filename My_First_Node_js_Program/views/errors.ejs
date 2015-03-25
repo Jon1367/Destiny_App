@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
  <head>
 	<meta charset="UTF-8">
 	<title>Desteny Character Explore</title>
 	<link rel="stylesheet" href="/foundation.css" type="text/css">
 </head>
-<body>
 
 
 <div class="sticky">
@@ -33,27 +30,30 @@
 </div>
 
 
+
+<div class="row error">
+    <div class="small-six large-centered columns">
+        <h3>User credentials do not match.</h3>
+        <h4>Please search again</h4>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="small-9 small-centered columns">
-       <h2 class="grayOut">Login</h2>
-        <form action="/processLogin" method="POST">
-            <label>Name</label>
-            <input type="text" name="name">
-            <label>Password</label>
-            <input type="password" name="password">
+        <form action="/processApi" method="POST">
 
+           <label>Enter Playstation Id  /  Gamertag</label>
+            <input type="text" name="gamerTag">
+
+           <label for="system">Choose Platform</label>
+            <select name="system">
+                <option value="2">PS4</option>
+                <option value="1">XboxOne</option>
+            </select>
 
             <button class="button small radius" id="purple" type="submit">Submit</button>
 
         </form>
     </div>
 </div>
-
-    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
-        <div>|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
-    </footer>
-
-
-</body>
-</html>
-

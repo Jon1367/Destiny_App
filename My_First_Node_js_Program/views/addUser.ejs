@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -6,7 +7,6 @@
 	<link rel="stylesheet" href="/foundation.css" type="text/css">
 </head>
 <body>
-
 
 <div class="sticky">
     <nav class="top-bar" data-topbar role="navigation">
@@ -31,16 +31,25 @@
         </nav>
     </nav>
 </div>
-
-
+	
 <div class="row">
     <div class="small-9 small-centered columns">
-       <h2 class="grayOut">Login</h2>
-        <form action="/processLogin" method="POST">
+       <h2 class="grayOut">Register</h2>
+        <form action="/processAdd" method="POST">
             <label>Name</label>
             <input type="text" name="name">
             <label>Password</label>
             <input type="password" name="password">
+            <label>Gamertag</label>
+            <input type="text" name="gamertag">
+            
+            
+            
+            <label for="system">Choose Platform</label>
+            <select name="system">
+                <option value="2">PS4</option>
+                <option value="1">XboxOne</option>
+            </select>
 
 
             <button class="button small radius" id="purple" type="submit">Submit</button>
@@ -56,4 +65,3 @@
 
 </body>
 </html>
-
