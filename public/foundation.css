@@ -1717,7 +1717,7 @@ meta.foundation-mq-topbar {
   height: 2.8125rem;
   line-height: 2.8125rem;
   position: relative;
-  background: #333333;
+  background: #A9A9A9;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -2005,7 +2005,7 @@ meta.foundation-mq-topbar {
 
 @media only screen and (min-width: 40.063em) {
   .top-bar {
-    background: #333333;
+    background: #282828;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
       content: " ";
@@ -6203,7 +6203,7 @@ th.hide-for-touch {
 
 /* My Css */
 a[class='purp'] {
-  color:#B23AEE !important;
+  color:#AB82FF!important;
 }
 
 button[id='purple'] {
@@ -6235,6 +6235,18 @@ input[id='imageIcon2']{
     position: absolute;
 }
 input[id='imageIcon3']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon1']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon2']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon3']{
     visibility: hidden;
     position: absolute;
 }
@@ -6276,7 +6288,7 @@ div > label {
 }
 
 body {
-     background-color: #9d9d9d;   
+     background-color: #F5F5F5;   
 }
 
 footer {
@@ -6299,5 +6311,15 @@ input[id='imageIcon2']:checked + label[for='imageIcon2'] > div{
   border:3px solid #B23AEE !important;
 }
 input[id='imageIcon3']:checked + label[for='imageIcon3'] > div{
+  border:3px solid #B23AEE !important;
+}
+
+input[id='fimageIcon1']:checked + label[for='fimageIcon1'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='fimageIcon2']:checked + label[for='fimageIcon2'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='fimageIcon3']:checked + label[for='fimageIcon3'] > div{
   border:3px solid #B23AEE !important;
 }

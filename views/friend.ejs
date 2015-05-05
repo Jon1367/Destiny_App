@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Destiny Character Explorer</title>
-
-</head>
-<body>
-
-<script>
-  var elNC = el.noConflict();
-  // Conflicting lib works again and use elNC for this library onwards... 
-</script> 
-
 <%- include header.ejs %>
+
+
 
 <div class="large-6 large-centered columns">
             <h2 class="grayOut">Character list for:</h2>
@@ -35,12 +23,12 @@
                 <span class="gsc"><%=characterOne['characterBase']['grimoireScore']%>  </span>
 
                 <span class="cls"><% if(characterOne['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterOne['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
+                    Titan
+                <% } else if(characterOne['characterBase']['classHash'] == '2271682572'){ %>  
+                    Warlock
+                <% } else { %>
+                    Hunter
+                <% } %> </span>
 
 
                 <span class="rceGndr"><% if(characterOne['characterBase']['raceHash'] == '3887404748'){ %>
@@ -53,10 +41,10 @@
                 
                 
                 <% if(characterOne['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
+                    Male
+                <% } else { %>  
+                    Female
+                <% } %></span>
             </div>
         </label>
     </div>
@@ -78,12 +66,12 @@
                     <span class="gsc"><%=characterTwo['characterBase']['grimoireScore']%>  </span>
 
                     <span class="cls"><% if(characterTwo['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterTwo['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
+                    Titan
+                <% } else if(characterTwo['characterBase']['classHash'] == '2271682572'){ %>  
+                    Warlock
+                <% } else { %>
+                    Hunter
+                <% } %> </span>
 
 
                     <span class="rceGndr"><% if(characterTwo['characterBase']['raceHash'] == '3887404748'){ %>
@@ -96,10 +84,10 @@
                 
                 
                 <% if(characterTwo['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
+                    Male
+                <% } else { %>  
+                    Female
+                <% } %></span>
                 </div>
             </label>
         </div>
@@ -122,12 +110,12 @@
                     <span class="gsc"><%=characterThree['characterBase']['grimoireScore']%>  </span>
 
                     <span class="cls"><% if(characterThree['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterThree['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
+                    Titan
+                <% } else if(characterThree['characterBase']['classHash'] == '2271682572'){ %>  
+                    Warlock
+                <% } else { %>
+                    Hunter
+                <% } %> </span>
 
 
                     <span class="rceGndr"><% if(characterThree['characterBase']['raceHash'] == '3887404748'){ %>
@@ -140,10 +128,10 @@
                 
                 
                 <% if(characterThree['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
+                    Male
+                <% } else { %>  
+                    Female
+                <% } %></span>
                 </div>
             </label>
         </div>
@@ -153,12 +141,23 @@
        
 
 </form>
-   
-    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
-        <div>|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
-    </footer>
-    
-    
-	</body>
-</html>
 
+<div class="row">
+    <div class="small-9 small-centered columns">
+       <h2 class="grayOut">Enter Friends ID</h2>
+        <form action="/processFriendApi" method="POST">
+
+           <label>Enter Playstation Id  /  Gamertag</label>
+            <input type="text" name="gamerTag">
+
+           <label for="system">Choose Platform</label>
+            <select name="system">
+                <option value="2">PS4</option>
+                <option value="1">XboxOne</option>
+            </select>
+
+            <button class="button small radius" id="purple" type="submit">Submit</button>
+
+        </form>
+    </div>
+</div>
