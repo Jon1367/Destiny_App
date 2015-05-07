@@ -18,7 +18,9 @@
 
 <div class="large-6 large-centered columns">
     <h2 class="grayOut">Character Stats:</h2>
-    
+        <h3 class="grayOut"><%= gamerTag %></h3>
+        <br>
+
 
 
        <form action="/back" method="Get">
@@ -78,7 +80,14 @@
               <button class="left button small radius" id="purple" type="submit">Return</button>
 
          <a href="/friend">Compare</a>
+    <% for(var i=0;i < hashItem.length;i++){%>
 
+    <p>   <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %></p>
+    <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="">
+
+    <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %></p>
+    <% }%>
+    
   
    </form>
     
@@ -86,8 +95,7 @@
 
     
     
-    
-    
+
     
     
     

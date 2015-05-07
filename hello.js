@@ -27,6 +27,8 @@ var gamerTag = '';
 var character;
 
 var characterInfo = [];
+var characterItems = [];
+var hash = [];
 
 var characterOne = [];
 var characterTwo = [];
@@ -130,28 +132,48 @@ app.post('/viewCharacter', function(req, res) {
 
 	characterchoose = req.body.character;
 
-	console.log(character);
+	console.log('==============   Character Choose ==============');
+	console.log(characterInfo[characterchoose]);
+
+	var characterId = characterInfo[characterchoose]['characterBase']['characterId'];
+	var memberId = characterInfo[characterchoose]['characterBase']['membershipId'];
+	var system = characterInfo[characterchoose]['characterBase']['membershipType'];
 
 
-	if (characterchoose == 0) {
-		character = characterOne;
-		res.redirect('/chooseCharacter');
 
-	}else if(characterchoose == 1){
-		character = characterTwo;
-		res.redirect('/chooseCharacter');
 
-	}else if(characterchoose == 2){
-		character = characterThree;
-		res.redirect('/chooseCharacter');
-	}
+	console.log(characterId);
+	console.log(memberId);
 
-});
-app.get('/chooseCharacter', function(req, res) {
+	api.characterInfo(memberId,characterId,system,function(result){
 
-	console.log(character);
+		console.log('==============   Hash Character Items ==============');
+		console.log(result['Response']['data']['buckets']['Equippable']);
+		console.log('==============   unHash Equippable ==============');
+		console.log(result['Response']['definitions']['items']);
 
-	res.render('./views/charView',{character:character});
+		//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
+		//console.log(result['Response']['definitions']['items']['250113089']['icon']);
+
+
+
+
+		var unHashItem  = result['Response']['definitions']['items'];
+		var hashItem= result['Response']['data']['buckets']['Equippable'];
+
+	res.render('./views/charView',{
+			gamerTag : gamerTag,
+			character : characterInfo[characterchoose],
+			hashItem : hashItem,
+			unHashItem : unHashItem
+
+        });
+
+	});
+
+
+
+
 
 });
 
@@ -192,15 +214,18 @@ app.post('/processApi', function(req, res) {
     
 	api.apiOne(system,gamerTag,function(result){
 
-        console.log(typeof(result));
-//        console.log(result);
+        console.log('++++++++ result +++++++++');
+       console.log(result);
+
+
         
         if (result == 55) {
             res.render('./views/errors');       
         } else {
         
-		data = result;
-//		console.log(data);
+		data = result['data']['characters'];
+        console.log('++++++++ characters +++++++++');
+		console.log(data);
         
 
 		membershipId = data[0]['characterBase']['membershipId'];
@@ -212,8 +237,8 @@ app.post('/processApi', function(req, res) {
 			characterInfo.push(data[i]);
 		};
 
-		console.log("character Info Variable");
-		console.log(characterInfo);
+		// console.log("character Info Variable");
+		// console.log(characterInfo);
 //		console.log(characterTwo);
 //		console.log(characterThree);
 
@@ -247,7 +272,7 @@ app.post('/processFriendApi', function(req, res) {
             res.render('./views/errors');       
         } else {
         
-		data = result;
+		data = result['data']['characters'];
 		console.log(data);
         
 
@@ -260,17 +285,17 @@ app.post('/processFriendApi', function(req, res) {
 			fcharacterInfo.push(data[i]);
 		};
 
-		// FRIEND API
-		console.log('FRIEND API ');
-		console.log(fcharacterOne);
-		console.log(fcharacterTwo);
-		console.log(fcharacterThree);
+		// // FRIEND API
+		// console.log('FRIEND API ');
+		// console.log(fcharacterOne);
+		// console.log(fcharacterTwo);
+		// console.log(fcharacterThree);
 
 
-		// FIRst Character
-		console.log(characterOne);
-		console.log(characterTwo);
-		console.log(characterThree);
+		// // FIRst Character
+		// console.log(characterOne);
+		// console.log(characterTwo);
+		// console.log(characterThree);
 
 		res.render('./views/compare',{gamerTag:gamerTag,
 			characterOne : characterOne,
@@ -287,8 +312,6 @@ app.post('/processFriendApi', function(req, res) {
 	});
 
 
-
-
 });
 app.post('/processCompare', function(req, res) {
 
@@ -301,13 +324,105 @@ app.post('/processCompare', function(req, res) {
 	console.log(cOne);
 	console.log(cTwo);
 
+	var characterId = characterInfo[cOne]['characterBase']['characterId'];
+	var memberId = characterInfo[cOne]['characterBase']['membershipId'];
+	var system = characterInfo[cOne]['characterBase']['membershipType'];
 
-	
-	res.render('./views/charCompare',{gamerTag:gamerTag,
-			character : characterInfo[cOne],
-			fgamerTag: fgamerTag,
-			fcharacter : fcharacterInfo[cTwo]
-        });
+	var fcharacterId = characterInfo[cTwo]['characterBase']['characterId'];
+	var fmemberId = characterInfo[cTwo]['characterBase']['membershipId'];
+	var fsystem = characterInfo[cTwo]['characterBase']['membershipType'];
+
+	api.characterInfo(memberId,characterId,system,function(result){
+
+		// console.log('==============   Hash Character Items ==============');
+		// console.log(result['Response']['data']['buckets']['Equippable']);
+		// console.log('==============   unHash Equippable ==============');
+		// console.log(result['Response']['definitions']['items']);
+
+		//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
+		//console.log(result['Response']['definitions']['items']['250113089']['icon']);
+
+
+
+
+		var unHashItem  = result['Response']['definitions']['items'];
+		var hashItem= result['Response']['data']['buckets']['Equippable'];
+
+
+		api.characterInfo(fmemberId,fcharacterId,fsystem,function(result){
+
+
+			var funHashItem  = result['Response']['definitions']['items'];
+			var fhashItem= result['Response']['data']['buckets']['Equippable'];
+
+
+			res.render('./views/charCompare',{gamerTag:gamerTag,
+					character : characterInfo[cOne],
+					fgamerTag: fgamerTag,
+					fcharacter : fcharacterInfo[cTwo],
+					hashItem : hashItem,
+	 				unHashItem : unHashItem,
+					fhashItem : fhashItem,
+	 				funHashItem : funHashItem
+		        });
+
+		});
+
+	});
+	// res.render('./views/charView',{
+	// 		gamerTag : gamerTag,
+	// 		character : characterInfo[characterchoose],
+	// 		hashItem : hashItem,
+	// 		unHashItem : unHashItem
+
+ // //        });
+	// res.render('./views/charCompare',{gamerTag:gamerTag,
+	// 		character : characterInfo[cOne],
+	// 		fgamerTag: fgamerTag,
+	// 		fcharacter : fcharacterInfo[cTwo]
+ //        });
+
+
+	// 	characterchoose = req.body.character;
+
+	// console.log('==============   Character Choose ==============');
+	// console.log(characterInfo[characterchoose]);
+
+	// var characterId = characterInfo[characterchoose]['characterBase']['characterId'];
+	// var memberId = characterInfo[characterchoose]['characterBase']['membershipId'];
+	// var system = characterInfo[characterchoose]['characterBase']['membershipType'];
+
+
+
+
+	// console.log(characterId);
+	// console.log(memberId);
+
+	// api.characterInfo(memberId,characterId,system,function(result){
+
+	// 	console.log('==============   Hash Character Items ==============');
+	// 	console.log(result['Response']['data']['buckets']['Equippable']);
+	// 	console.log('==============   unHash Equippable ==============');
+	// 	console.log(result['Response']['definitions']['items']);
+
+	// 	//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
+	// 	//console.log(result['Response']['definitions']['items']['250113089']['icon']);
+
+
+
+
+	// 	var unHashItem  = result['Response']['definitions']['items'];
+	// 	var hashItem= result['Response']['data']['buckets']['Equippable'];
+
+	// res.render('./views/charView',{
+	// 		gamerTag : gamerTag,
+	// 		character : characterInfo[characterchoose],
+	// 		hashItem : hashItem,
+	// 		unHashItem : unHashItem
+
+ //        });
+
+	// });
 
 });
 

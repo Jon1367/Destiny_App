@@ -43,14 +43,14 @@ exports.apiOne = function(system,gamerTag,callback){
        	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
 		.type('json')
 		.end(function (response) {
-//			console.log('data2');
-//			console.log(response.body);
+			console.log('data2');
+			console.log(response.body);
 
        		var data2 = response.body;
-			var characters = data2['Response']['data']['characters'];
+			//var characters = data2['Response']['data']['characters'];
 	 //    characterTwo = data['Response']['data']['characters'][1];
 	 //    characterThree = data['Response']['data']['characters'][2];
-			callback(characters);
+			callback(data2['Response']);
 
 		});
 
@@ -97,14 +97,14 @@ exports.friend = function(system,gamerTag,callback){
         unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
     .type('json')
     .end(function (response) {
-//      console.log('data2');
-//      console.log(response.body);
+     console.log('++++++++++++data2+++++++++++');
+     console.log(response.body);
 
           var data2 = response.body;
-      var characters = data2['Response']['data']['characters'];
-   //    characterTwo = data['Response']['data']['characters'][1];
-   //    characterThree = data['Response']['data']['characters'][2];
-      callback(characters);
+  // var characters = data2['Response']['data']['characters'];
+  //    characterTwo = data['Response']['data']['characters'][1];
+  //    characterThree = data['Response']['data']['characters'][2];
+      callback(data2['Response']);
 
     });
 
@@ -115,15 +115,11 @@ exports.friend = function(system,gamerTag,callback){
 };
 
 
+exports.characterInfo = function(membershipId,characterId,system,callback){
 
 
-
-
-
-
-exports.apiTwo = function(membershipId,characterId,callback){
-
-    unirest.get('http://www.bungie.net/Platform/Destiny/2/Account/'+membershipId+'/Character/'+characterId+'/Inventory/')
+    // http://www.bungie.net/Platform/Destiny/2/Account/4611686018428490430/Character/2305843009286077889/?definitions=true
+    unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/Character/'+characterId+'/Inventory/?definitions=true')
     .end(function (res) {
         
         var temp = res.body;

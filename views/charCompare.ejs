@@ -49,6 +49,13 @@
             </div>
         </label>
     </div>
+    <% for(var i=0;i < hashItem.length;i++){%>
+
+    <p>   <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %></p>
+    <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="">
+
+    <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %></p>
+    <% }%>
 </div>
 
 <!--Friend CHARACTERS-->
@@ -95,6 +102,13 @@
             </div>
         </label>
     </div>
+        <% for(var i=0;i < fhashItem.length;i++){%>
+
+    <p>   <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName'] %></p>
+    <img src="http://www.bungie.net<%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="">
+
+    <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %></p>
+    <% }%>
    </div>
 </form>
    </div>
