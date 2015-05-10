@@ -1717,7 +1717,7 @@ meta.foundation-mq-topbar {
   height: 2.8125rem;
   line-height: 2.8125rem;
   position: relative;
-  background: #A9A9A9;
+
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -1822,7 +1822,7 @@ meta.foundation-mq-topbar {
     height: 1px;
     width: 100%; }
   .top-bar-section ul li {
-    background: #333333; }
+  background-color: #1E3957 }
     .top-bar-section ul li > a {
       display: block;
       width: 100%;
@@ -2005,7 +2005,7 @@ meta.foundation-mq-topbar {
 
 @media only screen and (min-width: 40.063em) {
   .top-bar {
-    background: #282828;
+   background-color: #1E3957;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
       content: " ";
@@ -2144,7 +2144,7 @@ meta.foundation-mq-topbar {
       height: 2.8125rem;
       width: 0; }
     .top-bar-section .has-form {
-      background: #333333;
+
       padding: 0 0.9375rem;
       height: 2.8125rem; }
     .top-bar-section .right li .dropdown {
@@ -6201,16 +6201,26 @@ th.hide-for-touch {
     display: table-cell !important; } }
 
 
-/* My Css */
+/*============ My Class =========*/
+.white{
+
+  color:#fff;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight:200;
+}
+
 a[class='purp'] {
-  color:#AB82FF!important;
+  color:#fff!important;
+
 }
 
 button[id='purple'] {
     background-color: #B23AEE;
 }
 nav {
-    margin-bottom: 60px !important;
+    margin-bottom: 10px !important;
+
 }
 a {
   color:white;
@@ -6223,7 +6233,12 @@ li > a:hover{
 .showme {
     border: 1px solid black;   
 }
-
+.violet{
+  font-family: Helvetica, sans-serif;
+  color:#564ABC;
+  font-weight:400;
+  text-align:center;
+}
 
 /*CHARACTER CHOICES STYLING*/
 input[id='imageIcon1']{
@@ -6293,16 +6308,15 @@ body {
 
 footer {
     font-size: 13px;
-    background-color: rgb(51,51,51);
     color: #B23AEE;
 }
 .moveDown {
      margin-bottom: 30px;   
 }
 .grayOut {
-     color: #4b4b4b;   
+     color: #fff;   
 }
-
+/*============ Image Icons =========*/
 
 input[id='imageIcon1']:checked + label[for='imageIcon1'] > div{
   border:3px solid #B23AEE !important;
@@ -6322,4 +6336,43 @@ input[id='fimageIcon2']:checked + label[for='fimageIcon2'] > div{
 }
 input[id='fimageIcon3']:checked + label[for='fimageIcon3'] > div{
   border:3px solid #B23AEE !important;
+}
+ul[class="characters"] > li{
+
+  display: inline-block;
+}
+.images > li{
+
+  display: inline-block;
+}
+img[src="/images/header.jpg"]{
+
+  opacity: .9;
+
+}
+ul > li{
+
+  display: inline-block;
+}
+.parallax-background{
+  height: 620px;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+
+}
+.parallax-content {
+  max-width: 100%;
+  position: relative;
+  top: 500px;
+  padding: 50px;
+  font-size: 20px;
+  background-color: #fff;
+}              
+li:hover{
+  cursor: pointer;
 }

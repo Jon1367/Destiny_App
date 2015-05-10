@@ -1,8 +1,10 @@
 <%- include header.ejs %>
 
+<div class="row">
+    
 
 
-<div class="large-6 large-centered columns">
+<div class="large-6 columns">
             <h2 class="grayOut">Character list for:</h2>
         <h2 class="grayOut"><%= gamerTag %></h2>
         <br>
@@ -142,8 +144,8 @@
 
 </form>
 
-<div class="row">
-    <div class="small-9 small-centered columns">
+
+    <div class="large-6  columns">
        <h2 class="grayOut">Enter Friends ID</h2>
         <form action="/processFriendApi" method="POST">
 

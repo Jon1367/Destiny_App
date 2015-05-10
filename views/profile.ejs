@@ -14,150 +14,166 @@
 
 <%- include header.ejs %>
 
-<div class="large-6 large-centered columns">
-            <h2 class="grayOut">Character list for:</h2>
-        <h3 class="grayOut"><%= gamerTag %></h3>
-        <br>
-
-<form action="/viewCharacter" method="POST">
-
-<!--CHARACTER ONE-->
-    <div>
-        <input type="radio" id="imageIcon1" class="blah" name="character" value="0" />
-        <label for="imageIcon1">
-            <div class="imageBorder">
-                <img class="backgroundPath1" src="http://www.bungie.net<%= characterOne['emblemPath'] %>" width="61px">
-                <img class="backgroundPath2" src="http://www.bungie.net<%= characterOne['backgroundPath'] %>" width="300px">
 
 
-                <span class="lvl"><b><%=characterOne['characterLevel']%></b> </span>
+<br>
+<div class="parallax-content">
+    <div class="row">
+        <div class="large-6 large-centered columns">
+                    <h2 class="violet">Character list for: <%= gamerTag %> </h2>
+    
+                <br>
+                <br>
+                <br>
 
-                <span class="gsc"><%=characterOne['characterBase']['grimoireScore']%>  </span>
-
-                <span class="cls"><% if(characterOne['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterOne['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
+        <form action="/viewCharacter" method="POST" class="violet">
 
 
-                <span class="rceGndr"><% if(characterOne['characterBase']['raceHash'] == '3887404748'){ %>
-                    Human
-                <% } else if(characterOne['characterBase']['raceHash'] == '898834093'){ %>  
-                    Exo
-                <% } else { %>
-                    Awoken
-                <% } %>
-                
-                
-                <% if(characterOne['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
+
+        <!--CHARACTER ONE-->
+           <div>
+                <input type="radio" id="imageIcon1" class="blah" name="character" value="0" />
+                <label for="imageIcon1">
+                    <div class="imageBorder">
+                        <img class="backgroundPath1" src="http://www.bungie.net<%= characterOne['emblemPath'] %>" width="61px">
+                        <img class="backgroundPath2" src="http://www.bungie.net<%= characterOne['backgroundPath'] %>" width="300px">
+
+
+                        <span class="lvl"><b><%=characterOne['characterLevel']%></b> </span>
+
+                        <span class="gsc"><%=characterOne['characterBase']['grimoireScore']%>  </span>
+
+                        <span class="cls"><% if(characterOne['characterBase']['classHash'] == '3655393761'){ %>
+        	                Titan
+        		        <% } else if(characterOne['characterBase']['classHash'] == '2271682572'){ %>  
+        	                Warlock
+        		        <% } else { %>
+        	                Hunter
+        	            <% } %> </span>
+
+
+                        <span class="rceGndr"><% if(characterOne['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(characterOne['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(characterOne['characterBase']['genderType'] == 0){ %>
+        	                Male
+        		        <% } else { %>  
+        	                Female
+        	            <% } %></span>
+                    </div>
+                </label>
             </div>
-        </label>
+
+
+
+
+                <!--CHARACTER TWO-->
+                <div>
+                    <input type="radio" id="imageIcon2" class="blah" name="character" value="1" />
+                    <label for="imageIcon2">
+                        <div class="imageBorder">
+                            <img class="backgroundPath1" src="http://www.bungie.net<%= characterTwo['emblemPath'] %>" width="61px">
+                            <img class="backgroundPath2" src="http://www.bungie.net<%= characterTwo['backgroundPath'] %>" width="300px">
+
+
+                            <span class="lvl"><b><%=characterTwo['characterLevel']%></b> </span>
+
+                            <span class="gsc"><%=characterTwo['characterBase']['grimoireScore']%>  </span>
+
+                            <span class="cls"><% if(characterTwo['characterBase']['classHash'] == '3655393761'){ %>
+        	                Titan
+        		        <% } else if(characterTwo['characterBase']['classHash'] == '2271682572'){ %>  
+        	                Warlock
+        		        <% } else { %>
+        	                Hunter
+        	            <% } %> </span>
+
+
+                            <span class="rceGndr"><% if(characterTwo['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(characterTwo['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(characterTwo['characterBase']['genderType'] == 0){ %>
+        	                Male
+        		        <% } else { %>  
+        	                Female
+        	            <% } %></span>
+                        </div>
+                    </label>
+                </div>
+      
+
+
+
+
+
+                <!--CHARACTER THREE-->
+                <div>
+                    <input type="radio" id="imageIcon3" class="blah" name="character" value="2" />
+                    <label for="imageIcon3">
+                        <div class="imageBorder">
+                            <img class="backgroundPath1" src="http://www.bungie.net<%= characterThree['emblemPath'] %>" width="61px">
+                            <img class="backgroundPath2" src="http://www.bungie.net<%= characterThree['backgroundPath'] %>" width="300px">
+
+
+                            <span class="lvl"><b><%=characterThree['characterLevel']%></b> </span>
+
+                            <span class="gsc"><%=characterThree['characterBase']['grimoireScore']%>  </span>
+
+                            <span class="cls"><% if(characterThree['characterBase']['classHash'] == '3655393761'){ %>
+        	                Titan
+        		        <% } else if(characterThree['characterBase']['classHash'] == '2271682572'){ %>  
+        	                Warlock
+        		        <% } else if(characterThree['characterBase']['classHash'] == ' 671679327'){ %>
+        	                Hunter
+                    
+        	            <% } %> </span>
+
+
+                            <span class="rceGndr"><% if(characterThree['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(characterThree['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(characterThree['characterBase']['genderType'] == 0){ %>
+        	                Male
+        		        <% } else { %>  
+        	                Female
+        	            <% } %></span>
+                        </div>
+                    </label>
+                                <button class="button expand " type="submit" style="width:300px"= >Submit</button>
+                </div>
+
+        </form>
+
     </div>
+</div> <!-- End of Row-->
+</div>
 
+<br>
+<br>
+<br>
 
-
-
-        <!--CHARACTER TWO-->
-        <div>
-            <input type="radio" id="imageIcon2" class="blah" name="character" value="1" />
-            <label for="imageIcon2">
-                <div class="imageBorder">
-                    <img class="backgroundPath1" src="http://www.bungie.net<%= characterTwo['emblemPath'] %>" width="61px">
-                    <img class="backgroundPath2" src="http://www.bungie.net<%= characterTwo['backgroundPath'] %>" width="300px">
-
-
-                    <span class="lvl"><b><%=characterTwo['characterLevel']%></b> </span>
-
-                    <span class="gsc"><%=characterTwo['characterBase']['grimoireScore']%>  </span>
-
-                    <span class="cls"><% if(characterTwo['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterTwo['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
-
-
-                    <span class="rceGndr"><% if(characterTwo['characterBase']['raceHash'] == '3887404748'){ %>
-                    Human
-                <% } else if(characterTwo['characterBase']['raceHash'] == '898834093'){ %>  
-                    Exo
-                <% } else { %>
-                    Awoken
-                <% } %>
-                
-                
-                <% if(characterTwo['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
-                </div>
-            </label>
-        </div>
-
-
-
-
-
-        <!--CHARACTER THREE-->
-        <div>
-            <input type="radio" id="imageIcon3" class="blah" name="character" value="2" />
-            <label for="imageIcon3">
-                <div class="imageBorder">
-                    <img class="backgroundPath1" src="http://www.bungie.net<%= characterThree['emblemPath'] %>" width="61px">
-                    <img class="backgroundPath2" src="http://www.bungie.net<%= characterThree['backgroundPath'] %>" width="300px">
-
-
-                    <span class="lvl"><b><%=characterThree['characterLevel']%></b> </span>
-
-                    <span class="gsc"><%=characterThree['characterBase']['grimoireScore']%>  </span>
-
-                    <span class="cls"><% if(characterThree['characterBase']['classHash'] == '3655393761'){ %>
-	                Titan
-		        <% } else if(characterThree['characterBase']['classHash'] == '2271682572'){ %>  
-	                Warlock
-		        <% } else { %>
-	                Hunter
-	            <% } %> </span>
-
-
-                    <span class="rceGndr"><% if(characterThree['characterBase']['raceHash'] == '3887404748'){ %>
-                    Human
-                <% } else if(characterThree['characterBase']['raceHash'] == '898834093'){ %>  
-                    Exo
-                <% } else { %>
-                    Awoken
-                <% } %>
-                
-                
-                <% if(characterThree['characterBase']['genderType'] == 0){ %>
-	                Male
-		        <% } else { %>  
-	                Female
-	            <% } %></span>
-                </div>
-            </label>
-        </div>
-         <button class="button small radius" id="purple" type="submit">Submit</button>
-        </div>
-
-       
-
-</form>
-   
-    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
+    <footer style="bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns violet">
         <div>|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
     </footer>
-    
+
     
 	</body>
 </html>

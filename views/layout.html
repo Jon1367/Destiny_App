@@ -6,53 +6,64 @@
 	<link rel="stylesheet" href="/foundation.css" type="text/css">
 </head>
 <body>
- <nav class="top-bar" data-topbar role="navigation">
-	<ul class="title-area">
-		<li class="name">
-            <h1><a href="#" class="purp">Destiny Character Explorer</a></h1>
-		</li>
-	</ul>
+<div class="fixed">
+     <nav class="top-bar" data-topbar role="navigation">
+    	<ul class="title-area">
+    		<li class="name">
+                <h1><a href="#" class="purp">Destiny Character Explorer</a></h1>
+    		</li>
+    	</ul>
 
-	<nav>
-		<section class="top-bar-section">
-			<ul class="right ">
-				<li><a class="purp" href="/login">Login</a>                </li>
-				<li><a class="purp" href="/auth/facebook">FaceBook Login</a></li>
-				<li><a class="purp" href="/addUser">Register</a>
-                </li>
-                <li><a class="purp" href="/logout">Logout</a>
+    	<nav>
+    		<section class="top-bar-section">
+    			<ul class="right ">
+<!--     				<li><a class="purp" href="/login">Login</a>                </li>
+    				<li><a class="purp" href="/auth/facebook">FaceBook Login</a></li>
+    				<li><a class="purp" href="/addUser">Register</a>
+                    </li> -->
+                    <li class="has-form">
+                    <a class="purp button" href="/logout">Login</a>
                     </li>
 
-			</ul>	
-		</section>
-	</nav>
-</nav>
+    			</ul>	
+    		</section>
+    	</nav>
+    </nav>
+</div>
+<br>
 
-
-<div class="row">
-    <div class="small-9 small-centered columns">
-       <h2 class="grayOut">Welcome To Destiny Character Explorer</h2>
-        <form action="/processApi" method="POST">
-
-           <label>Enter Playstation Id  /  Gamertag</label>
-            <input type="text" name="gamerTag">
-
-           <label for="system">Choose Platform</label>
-            <select name="system">
-                <option value="2">PS4</option>
-                <option value="1">XboxOne</option>
-            </select>
-
-            <button class="button small radius" id="purple" type="submit">Submit</button>
-
-        </form>
+    <div class="parallax-background">
+    <img src="/images/header.jpg" width="100%" height="500" alt="">
     </div>
+
+<div class="parallax-content">
+    <div class="row">
+        <div class="small-9 small-centered columns">
+           <h2 class="violet">Welcome To Destiny Character Explorer</h2>
+            <form action="/processApi" method="POST">
+
+               <label class="violet">Enter Playstation Id  /  Gamertag</label>
+                <input type="text" name="gamerTag">
+
+               <label for="system" class="violet">Choose Platform</label>
+                <select name="system">
+                    <option value="2">PS4</option>
+                    <option value="1">XboxOne</option>
+                </select>
+
+                <button class="button expand " type="submit">Submit</button>
+
+            </form>
+        </div>
+    </div>
+
+        <footer style="bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns text-center">
+        <div class="violet">|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
+    </footer>
 </div>
 
 
-    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
-        <div>|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
-    </footer>
+
 
 
 </body>

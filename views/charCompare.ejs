@@ -1,7 +1,9 @@
 <%- include header.ejs %>
 
+<!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> -->
 
-<div class="row">
+<!-- <span data-tooltip="" aria-haspopup="true" class="has-tip" data-selector="tooltip-i9g6t32j5" aria-describedby="tooltip-i9g6t32j5" title="">Hover on desktop or touch me on mobile!</span>
+ -->
 
 <div class="large-6 columns">
             <h2 class="grayOut">Character list for:</h2>
@@ -49,13 +51,19 @@
             </div>
         </label>
     </div>
+    <ul class="images">
     <% for(var i=0;i < hashItem.length;i++){%>
 
-    <p>   <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %></p>
-    <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="">
+<!--     <p>   <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %></p> -->
 
-    <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %></p>
+    <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %>">
+    <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
+    </li>
+<!-- 
+    <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['tierTypeName'] %></p>
+    <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemTypeName'] %></p> -->
     <% }%>
+    </ul>
 </div>
 
 <!--Friend CHARACTERS-->
@@ -102,12 +110,22 @@
             </div>
         </label>
     </div>
+    <ul class="images">
         <% for(var i=0;i < fhashItem.length;i++){%>
 
-    <p>   <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName'] %></p>
-    <img src="http://www.bungie.net<%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="">
+<!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> -->
 
-    <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %></p>
+<!--     <p>   <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName'] %></p> -->
+    
+    <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName'] %>">
+    <img src="http://www.bungie.net<%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
+    </li>
+
+
+
+<!--     <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['tierTypeName'] %></p>
+    <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemTypeName'] %></p> -->
+
     <% }%>
    </div>
 </form>

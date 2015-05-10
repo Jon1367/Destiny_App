@@ -160,6 +160,9 @@ app.post('/viewCharacter', function(req, res) {
 
 		var unHashItem  = result['Response']['definitions']['items'];
 		var hashItem= result['Response']['data']['buckets']['Equippable'];
+		console.log('==============   DeBuging ==============');
+		console.log(characterchoose)
+		console.log(characterInfo[characterchoose])
 
 	res.render('./views/charView',{
 			gamerTag : gamerTag,
@@ -318,8 +321,6 @@ app.post('/processCompare', function(req, res) {
 	var cOne = req.body.character
 	var cTwo = req.body.fcharacter;
 
-
-
 	console.log("character Choice");
 	console.log(cOne);
 	console.log(cTwo);
@@ -369,6 +370,7 @@ app.post('/processCompare', function(req, res) {
 		});
 
 	});
+
 	// res.render('./views/charView',{
 	// 		gamerTag : gamerTag,
 	// 		character : characterInfo[characterchoose],

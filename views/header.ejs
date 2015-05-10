@@ -2,31 +2,38 @@
 	<meta charset="UTF-8">
 	<title>Desteny Character Explore</title>
 	<link rel="stylesheet" href="/foundation.css" type="text/css">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script rel="stylesheet" href="/js/foundation.tooltip.js" type="text/css"></script>
+
+
 </head>
 
 
-<div class="sticky">
-    <nav class="top-bar" data-topbar role="navigation">
+<div class="fixed">
+     <nav class="top-bar" data-topbar role="navigation">
         <ul class="title-area">
             <li class="name">
-                <h1><a href="http://localhost:8080/" class="purp">Destiny Character Explorer</a></h1>
+                <h1><a href="#" class="purp">Destiny Character Explorer</a></h1>
             </li>
         </ul>
 
         <nav>
             <section class="top-bar-section">
                 <ul class="right ">
-                    <li><a class="purp" href="/login">Login</a>
-                    </li>
-                    <li><a class="purp" href="/auth/facebook">FaceBook Login</a>
-                    </li>
+<!--                    <li><a class="purp" href="/login">Login</a>                </li>
+                    <li><a class="purp" href="/auth/facebook">FaceBook Login</a></li>
                     <li><a class="purp" href="/addUser">Register</a>
-                    </li>
-                    <li><a class="purp" href="/logout">Logout</a>
+                    </li> -->
+                    <li class="has-form">
+                    <a class="purp button" href="/logout">Login</a>
                     </li>
 
-                </ul>
+                </ul>   
             </section>
         </nav>
     </nav>
 </div>
+<br>
+    <div class="parallax-background">
+    <img src="/images/characters.jpg" width="100%" height="500" alt="">
+    </div>
