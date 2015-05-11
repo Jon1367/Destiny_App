@@ -15,97 +15,110 @@
 <%- include header.ejs %>
 
 
-    <div class="parallax-content">
-    <div class="large-6 large-centered columns">
-        <h2 class="violet">Character Stats:</h2>
-            <h3 class="violet"><%= gamerTag %></h3>
-            <br>
+<div class="parallax-content">
+    <div class="row">
+       <h2 class="violet">Character Stats:</h2>
+                <h3 class="violet"><%= gamerTag %></h3>
+                <br>
+        <div class="large-6 columns">
+         
+            <form action="/back" method="Get">
+                <input type=""  id="imageIcon1" class="blah" name="character" value="0" />
+                <label class='moveDown' for="imageIcon1">
+                    <div class="imageBorder">
+                        <img class="backgroundPath1" src="http://www.bungie.net<%= character['emblemPath'] %>" width="61px">
+                        <img class="backgroundPath2" src="http://www.bungie.net<%= character['backgroundPath'] %>" width="300px">
 
 
+                        <span class="lvl"><b><%=character['characterLevel']%></b> </span>
 
-           <form action="/back" method="Get">
-            <input type=""  id="imageIcon1" class="blah" name="character" value="0" />
-            <label class='moveDown' for="imageIcon1">
-                <div class="imageBorder">
-                    <img class="backgroundPath1" src="http://www.bungie.net<%= character['emblemPath'] %>" width="61px">
-                    <img class="backgroundPath2" src="http://www.bungie.net<%= character['backgroundPath'] %>" width="300px">
+                        <span class="gsc"><%=character['characterBase']['grimoireScore']%>  </span>
 
-
-                    <span class="lvl"><b><%=character['characterLevel']%></b> </span>
-
-                    <span class="gsc"><%=character['characterBase']['grimoireScore']%>  </span>
-
-                    <span class="cls"><% if(character['classHash'] == '3655393761'){ %>
-                        Titan
-                    <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
-                        Warlock
-                    <% } else { %>
-                        Hunter
-                    <% } %> </span>
+                        <span class="cls"><% if(character['characterBase']['classHash'] == '3655393761'){ %>
+                            Titan
+                        <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
+                            Warlock
+                        <% } else { %>
+                            Hunter
+                        <% } %> </span>
 
 
-                    <span class="rceGndr"><% if(character['characterBase']['raceHash'] == '3887404748'){ %>
-                        Human
-                    <% } else if(character['characterBase']['raceHash'] == '898834093'){ %>  
-                        Exo
-                    <% } else { %>
-                        Awoken
-                    <% } %>
-                    
-                    
-                    <% if(character['characterBase']['genderType'] == 0){ %>
-    	                Male
-    		        <% } else { %>  
-    	                Female
-    	            <% } %></span>
-    	            
+                        <span class="rceGndr"><% if(character['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(character['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(character['characterBase']['genderType'] == 0){ %>
+        	                Male
+        		        <% } else { %>  
+        	                Female
+        	            <% } %></span>
+        	            
+                    </div>
+                </label>
+                
+<!-- Character Class unHash -->
+        <span ><% if(character['characterBase']['classHash'] == '3655393761'){ %>
+
+                <div class="large-9 columns center">
+                    <img src="images/titain.jpg" alt="">
                 </div>
-            </label>
+
+                <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
+                <div class="large-9 columns center">
+                    <img src="images/warlock.jpg" alt="">
+                </div>
+                <% } else { %>
+                <div class="large-9 columns center">
+                    <img src="images/Hunter.jpg" alt="">
+                </div>
+        <% } %> </span>
             
             
+          
+           </form>
+        </div><!-- End of First Div-->
+
+    <div class="large-6 columns">
                 <div class="panel">
         <ul>
-        <li><strong>Defense:</strong> <%= character['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
-        <li><strong>Intellect:</strong> <%= character['characterBase']['stats']['STAT_INTELLECT']['value'] %></li>
-        <li><strong>Discipline:</strong> <%= character['characterBase']['stats']['STAT_DISCIPLINE']['value'] %></li>
-        <li><strong>Strength:</strong> <%= character['characterBase']['stats']['STAT_STRENGTH']['value'] %></li>
-        <li><strong>Armor:</strong> <%= character['characterBase']['stats']['STAT_ARMOR']['value'] %></li>
-        <li><strong>Recovery:</strong> <%= character['characterBase']['stats']['STAT_RECOVERY']['value'] %></li>
-        <li><strong>Agility:</strong> <%= character['characterBase']['stats']['STAT_AGILITY']['value'] %></li>
+            <li><strong>Defense:</strong> <%= character['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
+            <li><strong>Intellect:</strong> <%= character['characterBase']['stats']['STAT_INTELLECT']['value'] %></li>
+            <li><strong>Discipline:</strong> <%= character['characterBase']['stats']['STAT_DISCIPLINE']['value'] %></li>
+            <li><strong>Strength:</strong> <%= character['characterBase']['stats']['STAT_STRENGTH']['value'] %></li>
+            <li><strong>Armor:</strong> <%= character['characterBase']['stats']['STAT_ARMOR']['value'] %></li>
+            <li><strong>Recovery:</strong> <%= character['characterBase']['stats']['STAT_RECOVERY']['value'] %></li>
+            <li><strong>Agility:</strong> <%= character['characterBase']['stats']['STAT_AGILITY']['value'] %></li>
         <ul>
+        </div>
+        <div>
+            <ul class="images">
+             <% for(var i=0;i < hashItem.length;i++){%>
+    
+            <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %>">
+            <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
+            </li>
+
+
+            <% }%>
+            </ul>
+        </div>  
+
+            <a href="/friend" class="button expand">Compare Aginist Friends</a>
+            <a href="/back" class="button expand" type="submit" ≈>Choose Another Character</a>
     </div>
 
-                    <span ><% if(character['classHash'] == '3655393761'){ %>
-                                <img src="images/titain.jpg" alt="">
-                    <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
-                        Warlock
-                        <img src="images/warlock.jpg" alt="">
-                    <% } else { %>
-                        Hunter
-                        <img src="images/Hunter.jpg" alt="">
-                    <% } %> </span>
-        
 
-      
-                  <button class="left button small radius" id="purple" type="submit">Return</button>
 
-             <a href="/friend">Compare</a>
-        <ul class="images">
-        <% for(var i=0;i < hashItem.length;i++){%>
-
-    <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %>">
-    <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
-    </li>
-        <% }%>
-        
-      
-       </form>
-    </div>
-</div>
+    </div> <!-- End of Row -->
     
     
 
-    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns showme text-center site-footer">
+    <footer style="position:fixed; bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns text-center site-footer">
         <div>|&nbsp;&nbsp; Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
     </footer>
 

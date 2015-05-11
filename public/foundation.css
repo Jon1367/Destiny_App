@@ -6376,3 +6376,10 @@ ul > li{
 li:hover{
   cursor: pointer;
 }
+.mleft{
+  margin-left:60px;
+}
+.center{
+  margin: 0 auto;
+
+}
