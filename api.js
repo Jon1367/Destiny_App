@@ -7,6 +7,13 @@ function isEmptyObject(data) {
 
 exports.apiOne = function(system,gamerTag,callback){
 
+// Key: 96561BE3CFC49F03586B97D08C12745F
+
+// http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=[YOUR KEY HERE]&steamids=[STEAM 64 IDS]&format=[xml OR json]
+
+// http://api.steampowered.com/spike1367/GetPlayerSummaries/v0002/?key=96561BE3CFC49F03586B97D08C12745F&steamids=[STEAM 64 IDS]&format=json
+
+
 	var system;
 
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
@@ -141,7 +148,6 @@ exports.apiTwo = function(type,id,callback){
     });
 
 };
-
 
 
 

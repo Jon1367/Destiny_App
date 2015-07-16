@@ -11,6 +11,7 @@
     "mysql": "^2.5.5",
     "passport": "^0.2.1",
     "passport-facebook": "^2.0.0",
+    "passport-steam": "^0.1.5",
     "unirest": "^0.4.0"
   }
 }

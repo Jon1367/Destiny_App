@@ -11,6 +11,8 @@ var path = require('path');
 var ejs = require('ejs');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var SteamStrategy = require('passport-steam').Strategy;
+
 
 // modules
 var api = require('./api.js');
@@ -102,6 +104,43 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
  
+passport.use(new SteamStrategy({
+    returnURL: 'http://localhost:8080/auth/steam/return',
+    realm: 'http://localhost:8080/',
+    apiKey: '96561BE3CFC49F03586B97D08C12745F'
+  },
+  function(identifier, profile, done) {
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's Steam profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Steam account with a user record in your database,
+      // and return that user instead.
+      profile.identifier = identifier;
+
+      console.log(profile);
+      
+      return done(null, profile);
+    });
+  }
+));
+
+
+
+app.get('/auth/steam',
+  passport.authenticate('steam'),
+  function(req, res) {
+    // The request will be redirected to Steam for authentication, so
+    // this function will not be called.
+  });
+
+app.get('/auth/steam/return',
+  passport.authenticate('steam', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 /*=============   Routes   =============*/
 
@@ -217,7 +256,7 @@ app.post('/processApi', function(req, res) {
     
 	api.apiOne(system,gamerTag,function(result){
 
-        console.log('++++++++ result +++++++++');
+       console.log('++++++++ result +++++++++');
        console.log(result);
 
 
