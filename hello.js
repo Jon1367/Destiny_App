@@ -510,8 +510,8 @@ app.post('/processAdd', function(req, res) {
      var gamertag = req.body.gamertag;
 	 var system = req.body.system;
 
-//	 sess = req.session;
-//	 sess.name = name;
+	 sess = req.session;
+	 sess.name = name;
 
 
 	// SQL Query
