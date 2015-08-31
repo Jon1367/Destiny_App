@@ -152,11 +152,6 @@ app.post('/viewCharacter', function(req, res) {
 	characterchoose = req.body.character;
 
 	// console.log('==============   Character Choose ==============');
-	// console.log(characterInfo[characterchoose]);
-
-	var characterId = characterInfo[characterchoose]['characterBase']['characterId'];
-	var memberId = characterInfo[characterchoose]['characterBase']['membershipId'];
-	//var system = characterInfo[characterchoose]['characterBase']['membershipType'];
 
 	console.log('==============   Parsaing Data  ==============');
 	var ScharactOne = sData['data']['characters'][characterchoose];
@@ -171,7 +166,7 @@ app.post('/viewCharacter', function(req, res) {
 
 	res.render('./views/charView',{
 			gamerTag : sGamerTag,
-			character : characterInfo[characterchoose],
+			character : sData['data']['characters'][characterchoose],
 			hashItem : hashItem,
 			unHashItem : unHashItem
 
@@ -242,28 +237,13 @@ app.post('/processApi', function(req, res) {
 		data = result['data']['characters'];
         //console.log('++++++++ characters +++++++++');
 		 //console.log(data);
-        
-
-		membershipId = data[0]['characterBase']['membershipId'];
-		characterOne = data[0];
-		characterTwo = data[1];
-		characterThree = data[2];
-
-		for (var i = 0; i <= 2; i++) {
-			characterInfo.push(data[i]);
-		};
-
-		// console.log("character Info Variable");
-		// console.log(characterInfo);
-//		console.log(characterTwo);
-//		console.log(characterThree);
 
 
 
-			res.render('./views/profile',{gamerTag:gamerTag,
-				characterOne : characterOne,
-				characterTwo:characterTwo,
-				characterThree : characterThree
+			res.render('./views/profile',{gamerTag:sess.gamerTag,
+				characterOne : sess.UserOneData['data']['characters'][0],
+				characterTwo: sess.UserOneData['data']['characters'][1],
+				characterThree : sess.UserOneData['data']['characters'][2]
 	          });
 		
         }
