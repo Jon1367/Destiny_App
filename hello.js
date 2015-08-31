@@ -1,17 +1,17 @@
 // Node.js
 
 // Includes
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var unirest = require("unirest");
-var app = express();
-var http = require('http');
-var path = require('path');
-var ejs = require('ejs');
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var SteamStrategy = require('passport-steam').Strategy;
+var express 					= require('express');
+ 	session 					= require('express-session'),
+	bodyParser 					= require('body-parser'),
+ 	unirest 					= require("unirest"),
+ 	app 						= express(),
+ 	http 						= require('http'),
+ 	path 						= require('path'),
+	ejs 						= require('ejs'),
+ 	passport 					= require('passport');
+ 	FacebookStrategy 			= require('passport-facebook').Strategy;
+	SteamStrategy 				= require('passport-steam').Strategy;
 
 
 // modules
