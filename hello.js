@@ -53,20 +53,6 @@ var fcharacterThree = [];
 
 var faceBookName = "";
 
-// Connecting to MYSQL Data Base
-/*
- var mysql      = require('mysql');
- var connection = mysql.createConnection({
-   host     : 'localhost',
-   port     :  '8889',
-   database : 'projectdb',
-   user     : 'root',
-   password : 'root',
- });
-
-// connection.connect();
-
-*/
 
 //App Sets
 app.set('views', __dirname);
@@ -126,22 +112,6 @@ passport.use(new SteamStrategy({
 ));
 
 
-
-app.get('/auth/steam',
-  passport.authenticate('steam'),
-  function(req, res) {
-    // The request will be redirected to Steam for authentication, so
-    // this function will not be called.
-  });
-
-app.get('/auth/steam/return',
-  passport.authenticate('steam', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
-
 /*=============   Routes   =============*/
 
 //  Face Book Authenication
@@ -168,50 +138,52 @@ app.get('/', function(req,res){
 
 });
 app.post('/viewCharacter', function(req, res) {
+	console.log('==============   Sessions  ==============');
+	 sess = req.session;
+	 var sGamerTag = sess.gamerTag;
+	 var sSystem = sess.system;
+	 var sData = sess.UserOneData;
+
+	 console.log(sGamerTag);
+	 console.log(sSystem);
+	 //console.log(sData);
+
 
 	characterchoose = req.body.character;
 
-	console.log('==============   Character Choose ==============');
-	console.log(characterInfo[characterchoose]);
+	// console.log('==============   Character Choose ==============');
+	// console.log(characterInfo[characterchoose]);
 
 	var characterId = characterInfo[characterchoose]['characterBase']['characterId'];
 	var memberId = characterInfo[characterchoose]['characterBase']['membershipId'];
-	var system = characterInfo[characterchoose]['characterBase']['membershipType'];
+	//var system = characterInfo[characterchoose]['characterBase']['membershipType'];
 
+	console.log('==============   Parsaing Data  ==============');
+	var ScharactOne = sData['data']['characters'][characterchoose];
+	//console.log(ScharactOne);
 
+	var hashItem = ScharactOne['characterBase']['peerView']['equipment'];
 
+	var unHashItem =   sData['definitions']['items'];
+	console.log(hashItem);
+	console.log(unHashItem);
 
-	console.log(characterId);
-	console.log(memberId);
-
-	api.characterInfo(memberId,characterId,system,function(result){
-
-		console.log('==============   Hash Character Items ==============');
-		console.log(result['Response']['data']['buckets']['Equippable']);
-		console.log('==============   unHash Equippable ==============');
-		console.log(result['Response']['definitions']['items']);
-
-		//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
-		//console.log(result['Response']['definitions']['items']['250113089']['icon']);
-
-
-
-
-		var unHashItem  = result['Response']['definitions']['items'];
-		var hashItem= result['Response']['data']['buckets']['Equippable'];
-		console.log('==============   DeBuging ==============');
-		console.log(characterchoose)
-		console.log(characterInfo[characterchoose])
 
 	res.render('./views/charView',{
-			gamerTag : gamerTag,
+			gamerTag : sGamerTag,
 			character : characterInfo[characterchoose],
 			hashItem : hashItem,
 			unHashItem : unHashItem
 
         });
 
-	});
+
+
+		//var unHashItem  = result['Response']['definitions']['items'];
+		//var hashItem2= result['Response']['data']['buckets']['Equippable'];
+		// console.log('==============   DeBuging ==============');
+
+
 
 
 
@@ -246,28 +218,30 @@ app.post('/processApi', function(req, res) {
 	var data;
 
 	// Form Data
-	gamerTag = req.body.gamerTag;
+	var gamerTag = req.body.gamerTag;
 	var system = req.body.system;
 
 	console.log(gamerTag);
 	console.log(system);
 
+	sess = req.session;
+	sess.gamerTag = gamerTag;
+	sess.system = system;
 
     
 	api.apiOne(system,gamerTag,function(result){
 
        console.log('++++++++ result +++++++++');
        console.log(result);
+       	sess.UserOneData = result;
 
-
-        
         if (result == 55) {
             res.render('./views/errors');       
         } else {
         
 		data = result['data']['characters'];
-        console.log('++++++++ characters +++++++++');
-		console.log(data);
+        //console.log('++++++++ characters +++++++++');
+		 //console.log(data);
         
 
 		membershipId = data[0]['characterBase']['membershipId'];
@@ -307,7 +281,7 @@ app.post('/processFriendApi', function(req, res) {
 
 	api.friend(system,fgamerTag,function(result){
 
-        console.log(typeof(result));
+        //console.log(typeof(result));
 //        console.log(result);
         
         if (result == 55) {
@@ -360,9 +334,9 @@ app.post('/processCompare', function(req, res) {
 	var cOne = req.body.character
 	var cTwo = req.body.fcharacter;
 
-	console.log("character Choice");
-	console.log(cOne);
-	console.log(cTwo);
+	// console.log("character Choice");
+	// console.log(cOne);
+	// console.log(cTwo);
 
 	var characterId = characterInfo[cOne]['characterBase']['characterId'];
 	var memberId = characterInfo[cOne]['characterBase']['membershipId'];
@@ -410,60 +384,6 @@ app.post('/processCompare', function(req, res) {
 
 	});
 
-	// res.render('./views/charView',{
-	// 		gamerTag : gamerTag,
-	// 		character : characterInfo[characterchoose],
-	// 		hashItem : hashItem,
-	// 		unHashItem : unHashItem
-
- // //        });
-	// res.render('./views/charCompare',{gamerTag:gamerTag,
-	// 		character : characterInfo[cOne],
-	// 		fgamerTag: fgamerTag,
-	// 		fcharacter : fcharacterInfo[cTwo]
- //        });
-
-
-	// 	characterchoose = req.body.character;
-
-	// console.log('==============   Character Choose ==============');
-	// console.log(characterInfo[characterchoose]);
-
-	// var characterId = characterInfo[characterchoose]['characterBase']['characterId'];
-	// var memberId = characterInfo[characterchoose]['characterBase']['membershipId'];
-	// var system = characterInfo[characterchoose]['characterBase']['membershipType'];
-
-
-
-
-	// console.log(characterId);
-	// console.log(memberId);
-
-	// api.characterInfo(memberId,characterId,system,function(result){
-
-	// 	console.log('==============   Hash Character Items ==============');
-	// 	console.log(result['Response']['data']['buckets']['Equippable']);
-	// 	console.log('==============   unHash Equippable ==============');
-	// 	console.log(result['Response']['definitions']['items']);
-
-	// 	//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
-	// 	//console.log(result['Response']['definitions']['items']['250113089']['icon']);
-
-
-
-
-	// 	var unHashItem  = result['Response']['definitions']['items'];
-	// 	var hashItem= result['Response']['data']['buckets']['Equippable'];
-
-	// res.render('./views/charView',{
-	// 		gamerTag : gamerTag,
-	// 		character : characterInfo[characterchoose],
-	// 		hashItem : hashItem,
-	// 		unHashItem : unHashItem
-
- //        });
-
-	// });
 
 });
 
@@ -491,12 +411,7 @@ app.post('/processLogin', function(req, res) {
 	// sess.bool = true;
     
 
-	// // SQL Query
- // 	connection.query('SELECT username from users where username = ? and password = ?',[name,password],function(err, rows) {
- //   		console.log("hello"); 
- //   		console.log(rows);
 
-	//  });
 
     
     res.redirect('/');
@@ -512,13 +427,6 @@ app.post('/processAdd', function(req, res) {
 
 	 sess = req.session;
 	 sess.name = name;
-
-
-	// SQL Query
- 	// connection.query('insert into users(username,password,gamertag,system)values(?,?,?,?)',[name,password,gamertag,system],function(err, rows) {
-  //  		console.log("hello"); 
-  //  		console.log(rows);
-	 // });
 
 
 

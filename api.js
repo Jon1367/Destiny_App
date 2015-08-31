@@ -23,9 +23,9 @@ exports.apiOne = function(system,gamerTag,callback){
         
        //console.log(response.body)p;
        var data = response.body;
-        console.log('length');
-       console.log(typeof(data));
-        console.log(data);
+        //console.log('length');
+       // console.log(typeof(data));
+       //  console.log(data);
 
         if (isEmptyObject(data) == true) {
             callback(55);
@@ -41,17 +41,17 @@ exports.apiOne = function(system,gamerTag,callback){
            }else if(systemType = 1){
             system = "TigerXbox";
            }
-           console.log(systemType);
-           console.log(system);
-           console.log(membershipId);
+           // console.log(systemType);
+           // console.log(system);
+           // console.log(membershipId);
         }
 
 
-       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
+       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
 		.type('json')
 		.end(function (response) {
-			console.log('data2');
-			console.log(response.body);
+			//console.log('+++++++++++++++++++++++ Api One Results +++++++++++++++++++++++');
+			//console.log(response.body);
 
        		var data2 = response.body;
 			//var characters = data2['Response']['data']['characters'];
@@ -59,10 +59,10 @@ exports.apiOne = function(system,gamerTag,callback){
 	 //    characterThree = data['Response']['data']['characters'][2];
 			callback(data2['Response']);
 
-		});
+		  });
 
-     });
-    console.log('hello');
+    });
+
  
     
 };
@@ -101,11 +101,11 @@ exports.friend = function(system,gamerTag,callback){
         }
 
 
-        unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'')
+        unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
     .type('json')
     .end(function (response) {
-     console.log('++++++++++++data2+++++++++++');
-     console.log(response.body);
+     // console.log('++++++++++++data2+++++++++++');
+     // console.log(response.body);
 
           var data2 = response.body;
   // var characters = data2['Response']['data']['characters'];
@@ -130,7 +130,7 @@ exports.characterInfo = function(membershipId,characterId,system,callback){
     .end(function (res) {
         
         var temp = res.body;
-        callback(temp)
+        callback(temp);
         
     });
 };
