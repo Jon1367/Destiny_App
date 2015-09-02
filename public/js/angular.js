@@ -4,26 +4,38 @@
 
 // start foundation 
 $(document).foundation();
-var app = angular.module("sampleApp", ["firebase"]);
 
+$( "#SignIn" ).click(function() {
 
-app.controller("SampleCtrl", function($scope, $firebaseObject) {
-  var ref = new Firebase("https://destinyapp.firebaseio.com/");
-  // download the data into a local object
-  $scope.data = $firebaseObject(ref);
-  // putting a console.log here won't work, see below
+$('#myModal').foundation('reveal', 'close');
+
 });
 
-function MyController($scope, angularFireAuth) {
-  var ref = new Firebase("https://destinyapp.firebaseio.com/");
-  angularFireAuth.initialize(ref, {scope: $scope, name: "user"});
-}
+// ============  Angular ===========
 
-	// .controller('MainController', function($scope,CandyService){
+var app = angular.module("destinyApp", ["firebase"]);
 
-	// 	  console.log("Hello1");
-        
 
- //        $scope.candyArray=CandyService.getCandy();
+app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
+  function($scope, $firebaseAuth) {
+	var ref = new Firebase("https://destinyapp.firebaseio.com/");
 
- //    })
+    auth = $firebaseAuth(ref);
+
+    $scope.signIn = function() {
+
+	var ref = new Firebase("https://destinyapp.firebaseio.com/");
+		ref.authWithPassword({
+		  "email": $scope.email,
+		  "password": $scope.password
+		}, function(error, authData) {
+		  if (error) {
+		    console.log("Login Failed!", error);
+		  } else {
+		    console.log("Authenticated successfully with payload:", authData);
+		  }
+		});
+
+    };
+  }
+]);

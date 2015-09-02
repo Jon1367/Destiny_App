@@ -9,13 +9,12 @@ var app = express();
 var http = require('http');
 var path = require('path');
 var ejs = require('ejs');
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var SteamStrategy = require('passport-steam').Strategy;
 
 
 // modules
-var api = require('./api.js');
+var api = require('./models/api.js');
+var player = require('./models/player.js');
+
 
 // global Variables
 
@@ -63,64 +62,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({secret: 'ssshhhhh'}));
 app.use(express.static(__dirname + '/public'));
 
-// passport initlze
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Connecting to FaceBook 
-passport.use(new FacebookStrategy({
-    clientID: '804379889616035',
-    clientSecret: '3662bc272f3c540efa827618188e17a5',
-    callbackURL: "http://localhost:8080/auth/facebook/callback",
-    enableProof: false
-  },
-  function(accessToken, refreshToken, profile, done) {
-  	process.nextTick(function() {
-  	//console.log(profile);
-    done(null, profile);
-  });
-}));
-
-// SerializeUser
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
- 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
- 
-passport.use(new SteamStrategy({
-    returnURL: 'http://localhost:8080/auth/steam/return',
-    realm: 'http://localhost:8080/',
-    apiKey: '96561BE3CFC49F03586B97D08C12745F'
-  },
-  function(identifier, profile, done) {
-    process.nextTick(function () {
-
-      // To keep the example simple, the user's Steam profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Steam account with a user record in your database,
-      // and return that user instead.
-      profile.identifier = identifier;
-
-      console.log(profile);
-      
-      return done(null, profile);
-    });
-  }
-));
 
 
 /*=============   Routes   =============*/
-
-//  Face Book Authenication
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/success',
-  failureRedirect: '/error'
-}));
 
 app.get('/success', function(req, res, next) {
   res.redirect('/');
@@ -223,6 +167,9 @@ app.post('/processApi', function(req, res) {
 	sess.gamerTag = gamerTag;
 	sess.system = system;
 
+	var playerOne = new player(gamerTag,system);
+
+	console.log(nplayer);
     
 	api.apiOne(system,gamerTag,function(result){
 
@@ -240,7 +187,7 @@ app.post('/processApi', function(req, res) {
 
 
 
-			res.render('./views/profile',{gamerTag:sess.gamerTag,
+			res.render('./views/profile',{gamerTag:nplayer.gamerTag,
 				characterOne : sess.UserOneData['data']['characters'][0],
 				characterTwo: sess.UserOneData['data']['characters'][1],
 				characterThree : sess.UserOneData['data']['characters'][2]
@@ -343,6 +290,7 @@ app.post('/processCompare', function(req, res) {
 		var hashItem= result['Response']['data']['buckets']['Equippable'];
 
 
+
 		api.characterInfo(fmemberId,fcharacterId,fsystem,function(result){
 
 
@@ -381,23 +329,6 @@ app.get('/addUser', function(req, res) {
 
 });
 
-app.post('/processLogin', function(req, res) {
-
-	var name = req.body.name;
-	var password = req.body.password;
-
-	// sess = req.session;
-	// sess.name = name;
-	// sess.bool = true;
-    
-
-
-
-    
-    res.redirect('/');
-
-     
-});
 app.post('/processAdd', function(req, res) {
 
 	 var name = req.body.name;

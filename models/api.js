@@ -1,5 +1,5 @@
 var unirest = require("unirest");
-var home = require('./hello.js');
+var home = require('../hello.js');
 
 function isEmptyObject(data) {
     return !Object.keys(data["Response"]).length;   
