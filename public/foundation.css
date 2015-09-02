@@ -6241,15 +6241,15 @@ li > a:hover{
 }
 
 /*CHARACTER CHOICES STYLING*/
+input[id='imageIcon0']{
+    visibility: hidden;
+    position: absolute;
+}
 input[id='imageIcon1']{
     visibility: hidden;
     position: absolute;
 }
 input[id='imageIcon2']{
-    visibility: hidden;
-    position: absolute;
-}
-input[id='imageIcon3']{
     visibility: hidden;
     position: absolute;
 }
@@ -6318,13 +6318,13 @@ footer {
 }
 /*============ Image Icons =========*/
 
+input[id='imageIcon0']:checked + label[for='imageIcon0'] > div{
+  border:3px solid #B23AEE !important;
+}
 input[id='imageIcon1']:checked + label[for='imageIcon1'] > div{
   border:3px solid #B23AEE !important;
 }
 input[id='imageIcon2']:checked + label[for='imageIcon2'] > div{
-  border:3px solid #B23AEE !important;
-}
-input[id='imageIcon3']:checked + label[for='imageIcon3'] > div{
   border:3px solid #B23AEE !important;
 }
 

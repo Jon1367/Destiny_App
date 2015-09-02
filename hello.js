@@ -16,24 +16,7 @@ var api = require('./models/api.js');
 var player = require('./models/player.js');
 
 
-// global Variables
-
-// User Data
-var membershipId;
-var gamerTag = '';
-// var characterId;
-
-
-// user's character Info
-var character;
-
-var characterInfo = [];
-var characterItems = [];
-var hash = [];
-
-var characterOne = [];
-var characterTwo = [];
-var characterThree = [];
+var playerOne = new player();
 
 // Friends Character Info
 var fcharacter;
@@ -49,8 +32,6 @@ var fcharacterThree = [];
  	AppId: 804379889616035
  	AppSerect: 3662bc272f3c540efa827618188e17a5
 */
-
-var faceBookName = "";
 
 
 //App Sets
@@ -83,7 +64,7 @@ app.get('/', function(req,res){
 });
 app.post('/viewCharacter', function(req, res) {
 	console.log('==============   Sessions  ==============');
-	 sess = req.session;
+	 var sess = req.session;
 	 var sGamerTag = sess.gamerTag;
 	 var sSystem = sess.system;
 	 var sData = sess.UserOneData;
@@ -132,10 +113,13 @@ app.post('/viewCharacter', function(req, res) {
 
 app.get('/friend', function(req, res) {
 
+	var sess = req.session;
+	var gamerTag = sess.gamerTag;
+
 	res.render('./views/friend',{gamerTag:gamerTag,
-	characterOne : characterOne,
-	characterTwo:characterTwo,
-	characterThree : characterThree
+	characterOne : sess.UserOneData['data']['characters'][0],
+	characterTwo: sess.UserOneData['data']['characters'][1],
+	characterThree : sess.UserOneData['data']['characters'][2]
  	});
 
 });
@@ -167,15 +151,18 @@ app.post('/processApi', function(req, res) {
 	sess.gamerTag = gamerTag;
 	sess.system = system;
 
-	var playerOne = new player(gamerTag,system);
+	playerOne.gamerTag = gamerTag;
+	playerOne.system = system;
 
-	console.log(nplayer);
+    console.log('++++++++ Object +++++++++');
+
     
 	api.apiOne(system,gamerTag,function(result){
 
        console.log('++++++++ result +++++++++');
-       console.log(result);
+       //console.log(result);
        	sess.UserOneData = result;
+       	playerOne.data = result;
 
         if (result == 55) {
             res.render('./views/errors');       
@@ -186,12 +173,12 @@ app.post('/processApi', function(req, res) {
 		 //console.log(data);
 
 
+			console.log(playerOne);
 
-			res.render('./views/profile',{gamerTag:nplayer.gamerTag,
-				characterOne : sess.UserOneData['data']['characters'][0],
-				characterTwo: sess.UserOneData['data']['characters'][1],
-				characterThree : sess.UserOneData['data']['characters'][2]
-	          });
+			res.render('./views/profile',{
+				gamerTag : playerOne.gamerTag,
+				data : playerOne.data
+	        });
 		
         }
                    
@@ -203,10 +190,12 @@ app.post('/processFriendApi', function(req, res) {
 
 	var data;
 
-	fgamerTag = req.body.gamerTag;
-	var system = req.body.system;
+	var friendGamerTag = req.body.gamerTag;
+	var fsystem = req.body.system;
 
-	api.friend(system,fgamerTag,function(result){
+	var nplayer = new player(friendGamerTag,fsystem);
+
+	api.apiOne(fsystem,friendGamerTag,function(result){
 
         //console.log(typeof(result));
 //        console.log(result);
@@ -216,10 +205,11 @@ app.post('/processFriendApi', function(req, res) {
         } else {
         
 		data = result['data']['characters'];
-		console.log(data);
+		console.log('++++++++++ Friend Api +++++++++');
+
+		console.log(result);
         
 
-		membershipId = data[0]['characterBase']['membershipId'];
 		fcharacterOne = data[0];
 		fcharacterTwo = data[1];
 		fcharacterThree = data[2];

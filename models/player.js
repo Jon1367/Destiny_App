@@ -1,8 +1,9 @@
 // Constructor
-function PlayerOne(gamerTag,system) {
+function PlayerOne() {
   // always initialize all instance properties
-  this.gamerTag = gamerTag;
-  this.system = system; // default value
+  this.gamerTag = '';
+  this.system =  0;
+  this.data; // default value
 }
 // class methods
 PlayerOne.prototype.fooBar = function() {
