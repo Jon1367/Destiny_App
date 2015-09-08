@@ -134,16 +134,6 @@ app.get('/friend', function(req, res) {
  	});
 
 });
-app.get('/back', function(req, res) {
-
-	
-	res.render('./views/profile',{gamerTag:gamerTag,
-			characterOne : characterOne,
-			characterTwo:characterTwo,
-			characterThree : characterThree
-                                     });
-
-});
 
 app.post('/processFriendApi', function(req, res) {
 
@@ -177,17 +167,6 @@ app.post('/processFriendApi', function(req, res) {
 			fcharacterInfo.push(data[i]);
 		};
 
-		// // FRIEND API
-		// console.log('FRIEND API ');
-		// console.log(fcharacterOne);
-		// console.log(fcharacterTwo);
-		// console.log(fcharacterThree);
-
-
-		// // FIRst Character
-		// console.log(characterOne);
-		// console.log(characterTwo);
-		// console.log(characterThree);
 
 		res.render('./views/compare',{gamerTag:gamerTag,
 			characterOne : characterOne,
@@ -203,8 +182,18 @@ app.post('/processFriendApi', function(req, res) {
 
 	});
 
+});
+app.get('/back', function(req, res) {
+
+	
+	res.render('./views/profile',{gamerTag:gamerTag,
+			characterOne : characterOne,
+			characterTwo:characterTwo,
+			characterThree : characterThree
+                                     });
 
 });
+
 app.post('/processCompare', function(req, res) {
 
 	var cOne = req.body.character
