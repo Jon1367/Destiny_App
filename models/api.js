@@ -14,11 +14,11 @@ exports.apiOne = function(system,gamerTag,callback){
 // http://api.steampowered.com/spike1367/GetPlayerSummaries/v0002/?key=96561BE3CFC49F03586B97D08C12745F&steamids=[STEAM 64 IDS]&format=json
 
 
-	var system;
 
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
     .type('json')
     .end(function (response) {
+  var system;
         
         
        //console.log(response.body)p;
@@ -66,7 +66,7 @@ exports.apiOne = function(system,gamerTag,callback){
  
     
 };
-exports.friend = function(system,gamerTag,callback){
+exports.friend = function(gamerTag,system,callback){
 
   var system;
 

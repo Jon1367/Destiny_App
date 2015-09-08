@@ -9,6 +9,7 @@ var app = express();
 var http = require('http');
 var path = require('path');
 var ejs = require('ejs');
+var async = require('async');
 
 
 // modules
@@ -16,7 +17,6 @@ var api = require('./models/api.js');
 var player = require('./models/player.js');
 
 
-var playerOne = new player();
 
 // Friends Character Info
 var fcharacter;
@@ -47,70 +47,81 @@ app.use(express.static(__dirname + '/public'));
 
 /*=============   Routes   =============*/
 
-app.get('/success', function(req, res, next) {
-  res.redirect('/');
-});
- 
-app.get('/error', function(req, res, next) {
-  res.send("Error logging in.");
-});
-
-/*=============   Views   =============*/
-
 app.get('/', function(req,res){
 
 	res.sendfile(path.join(__dirname + '/views/layout.html'));
 
 });
+app.post('/processApi', function(req, res) {
+
+	var playerOne = new player();
+	// Form Data
+	playerOne.gamerTag = req.body.gamerTag;
+	playerOne.system = req.body.system;
+
+	// Setting Sessions
+	sess = req.session;
+	sess.gamerTag = playerOne.gamerTag;
+	sess.system = playerOne.system;
+
+
+	// Api call
+	playerOne.getDestinyInfo(playerOne.system,playerOne.gamerTag,function(result){
+
+    	sess.UserOneData = result;
+       	playerOne.data = result;
+    	sess.membershipId =	playerOne.data['data']['membershipId'];
+    	sess.characters = [];
+
+    	// storing characterID in session
+    	for (var i = 0; i < playerOne.data['data']['characters'].length ; i++) {
+    		//console.log(playerOne.data['data']['characters'][i]['characterBase']['characterId']);
+    		sess.characters.push(playerOne.data['data']['characters'][i]['characterBase']['characterId'])
+    	};
+
+    	//Render Views
+		res.render('./views/profile',{
+			gamerTag : playerOne.gamerTag,
+			data : playerOne.data
+	    });
+
+	 });
+
+});
+
 app.post('/viewCharacter', function(req, res) {
-	console.log('==============   Sessions  ==============');
-	 var sess = req.session;
-	 var sGamerTag = sess.gamerTag;
-	 var sSystem = sess.system;
-	 var sData = sess.UserOneData;
 
-	 console.log(sGamerTag);
-	 console.log(sSystem);
-	 //console.log(sData);
-
-
+	var sess = req.session;
+	var playerOne = new player();
 	characterchoose = req.body.character;
 
-	// console.log('==============   Character Choose ==============');
-
-	console.log('==============   Parsaing Data  ==============');
-	var ScharactOne = sData['data']['characters'][characterchoose];
-	//console.log(ScharactOne);
-
-	var hashItem = ScharactOne['characterBase']['peerView']['equipment'];
-
-	var unHashItem =   sData['definitions']['items'];
-	console.log(hashItem);
-	console.log(unHashItem);
+	var sData = sess.UserOneData;
 
 
-	res.render('./views/charView',{
-			gamerTag : sGamerTag,
+	playerOne.getCharacterInfo(sess.system,sess.membershipId,sess.characters[characterchoose] ,function(result){
+	console.log('==============   Character API  ==============');
+
+		console.log(result);
+		var hashItem = result['data']['buckets']['Equippable'];
+		var unHashItem =   result['definitions']['items'];
+
+
+		res.render('./views/charView',{
+			gamerTag : sess.gamerTag,
 			character : sData['data']['characters'][characterchoose],
 			hashItem : hashItem,
 			unHashItem : unHashItem
-
-        });
-
+	    });
 
 
-		//var unHashItem  = result['Response']['definitions']['items'];
-		//var hashItem2= result['Response']['data']['buckets']['Equippable'];
-		// console.log('==============   DeBuging ==============');
-
-
-
-
+	 });
 
 
 
 });
 
+
+/*=============   Friend Processing   =============*/
 app.get('/friend', function(req, res) {
 
 	var sess = req.session;
@@ -132,58 +143,6 @@ app.get('/back', function(req, res) {
 			characterThree : characterThree
                                      });
 
-});
-
-/*=============   Processing   =============*/
-
-app.post('/processApi', function(req, res) {
-
-	var data;
-
-	// Form Data
-	var gamerTag = req.body.gamerTag;
-	var system = req.body.system;
-
-	console.log(gamerTag);
-	console.log(system);
-
-	sess = req.session;
-	sess.gamerTag = gamerTag;
-	sess.system = system;
-
-	playerOne.gamerTag = gamerTag;
-	playerOne.system = system;
-
-    console.log('++++++++ Object +++++++++');
-
-    
-	api.apiOne(system,gamerTag,function(result){
-
-       console.log('++++++++ result +++++++++');
-       //console.log(result);
-       	sess.UserOneData = result;
-       	playerOne.data = result;
-
-        if (result == 55) {
-            res.render('./views/errors');       
-        } else {
-        
-		data = result['data']['characters'];
-        //console.log('++++++++ characters +++++++++');
-		 //console.log(data);
-
-
-			console.log(playerOne);
-
-			res.render('./views/profile',{
-				gamerTag : playerOne.gamerTag,
-				data : playerOne.data
-	        });
-		
-        }
-                   
-
-	});
 });
 
 app.post('/processFriendApi', function(req, res) {
