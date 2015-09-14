@@ -1,46 +1,60 @@
- <head>
-	<meta charset="UTF-8">
-	<title>Desteny Character Explore</title>
-    <link rel="stylesheet" href="/foundation.css" type="text/css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-      <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
-    <script src="./js/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Destiny Character Explorer</title>
+    <link rel="stylesheet" href="./css/foundation.css" type="text/css">
 
-
+    
 </head>
-
-
+<body  ng-app="destinyApp">
 <div class="fixed">
      <nav class="top-bar" data-topbar role="navigation">
         <ul class="title-area">
             <li class="name">
-                <h1><a href="/" class="purp">Destiny Character Explorer</a></h1>
+          <h1><a href="/" class="purp">Destiny Character Explorer</a></h1>
             </li>
         </ul>
-
-        <nav>
             <section class="top-bar-section">
-                <ul class="right ">
-<!--                    <li><a class="purp" href="/login">Login</a>                </li>
-                    <li><a class="purp" href="/auth/facebook">FaceBook Login</a></li>
-                    <li><a class="purp" href="/addUser">Register</a>
-                    </li> -->
-                    <li class="has-form">
-                    <a class="purp button" href="/logout">Login</a>
-                    </li>
-
-                </ul>   
+              <ul class="right ">
+                <li class="has-form">
+                  <a data-reveal-id="signUp">Sign Up</a>
+                </li>
+                <li class="has-form">
+                  <a class="button" data-reveal-id="myModal">Login</a>
+                </li>
+              </ul>   
             </section>
-        </nav>
-    </nav>
+      </nav>
 </div>
-<br>
-    <div class="parallax-background">
-    <img src="/images/characters.jpg" width="100%" height="500" alt="">
-    </div>
+<!-- End of Nav  -->
+
+  <!-- Modals -->
+<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <br>
+  <br>
+  <form ng-controller="AuthCtrl">
+    <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+    <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+    <input id="SignIn" type="submit" aria-label="Close" class="button expand" ng-click="signIn()">
+  </form>
+
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="signUp" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <form ng-controller="addUser">
+    <br>
+  <br>
+    <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+    <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+    <input type="text" name="gamerTag" placeholder-="GamerTag" ng-model="gamerTag">
+    <select name="system" ng-model="system">
+        <option value="2">PS4</option>
+        <option value="1">XboxOne</option>
+    </select>
+    <input id="SignUp" type="submit" aria-label="Close" class="button expand" ng-click="signUp()">
+  </form>
+
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

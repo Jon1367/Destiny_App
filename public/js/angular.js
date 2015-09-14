@@ -10,11 +10,17 @@ $( "#SignIn" ).click(function() {
 $('#myModal').foundation('reveal', 'close');
 
 });
+$( "#SignUp" ).click(function() {
+
+$('#signUp').foundation('reveal', 'close');
+
+});
 
 // ============  Angular ===========
-
 var app = angular.module("destinyApp", ["firebase"]);
 
+
+// ============  Firebase Auth ===========
 
 app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
   function($scope, $firebaseAuth) {
@@ -39,3 +45,35 @@ app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
     };
   }
 ]);
+
+// ============  Add Firebase User ===========
+
+app.controller("addUser", ["$scope", "$firebaseAuth",
+  	function($scope, $firebaseAuth) {
+		var ref = new Firebase("https://destinyapp.firebaseio.com/");
+
+	    $scope.signUp = function() {
+
+			ref.createUser({
+			  email: $scope.email,
+			  password: $scope.password
+			}, function(error, userData) {
+			  if (error) {
+			    switch (error.code) {
+			      case "EMAIL_TAKEN":
+			        console.log("The new user account cannot be created because the email is already in use.");
+			        break;
+			      case "INVALID_EMAIL":
+			        console.log("The specified email is not a valid email.");
+			        break;
+			      default:
+			        console.log("Error creating user:", error);
+			    }
+			  } else {
+			    console.log("Successfully created user account with uid:", userData.uid);
+			  }
+			});
+		};
+	}
+]);
+

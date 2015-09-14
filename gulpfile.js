@@ -19,9 +19,8 @@ gulp.task('dev', function () {
 });
 
 
-// Rerun the task when a file changes
  gulp.task('watch', function() {
-     gulp.watch(config.assetsPath + '/**/*.css', ['css']); 
+     gulp.watch(config.assetsPath + '/foundation.css', ['css']); 
 });
 
 

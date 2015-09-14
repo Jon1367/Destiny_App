@@ -1,0 +1,32 @@
+<%- include header.ejs %>
+
+<div class="container">
+<!-- find Destiny Charcter -->
+    <div class="row">
+        <div class="small-9 small-centered columns">
+           <h2 class="violet">Welcome To Destiny Character Explorer</h2>
+            <form action="/processApi" method="POST">
+
+               <label class="violet">Enter Playstation Id  /  Gamertag</label>
+                <input type="text" name="gamerTag">
+
+               <label for="system" class="violet">Choose Platform</label>
+                <select name="system">
+                    <option value="2">PS4</option>
+                    <option value="1">XboxOne</option>
+                </select>
+
+                <button class="button expand " type="submit">Submit</button>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<%- include footer.ejs %>
+

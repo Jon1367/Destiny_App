@@ -49,7 +49,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req,res){
 
-	res.sendfile(path.join(__dirname + '/views/layout.html'));
+		res.render('./views/layout');
 
 });
 app.post('/processApi', function(req, res) {

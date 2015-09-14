@@ -12,7 +12,6 @@ function Player() {
 // class methods
 Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
 
-	var system;
 
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
     .type('json')
@@ -23,21 +22,13 @@ Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
         membershipId = data["Response"][0]["membershipId"];
         systemType = data["Response"][0]["membershipType"];
 
-           if(systemType = 2){
-            system = 'TigerPSN';
-           }else if(systemType = 1){
-            system = "TigerXbox";
-           }
         
        	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
 		.type('json')
 		.end(function (response) {
-			//console.log('+++++++++++++++++++++++ Api One Results +++++++++++++++++++++++');
+		
        		var data2 = response.body;
-       		//console.log(data2);
 			callback(data2['Response']);
-			//return data2['Response'];
-			//return {data: data2['Response']};
 
 		  });
 
