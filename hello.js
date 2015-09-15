@@ -1,28 +1,26 @@
 // Node.js
 
 // Includes
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var unirest = require("unirest");
-var app = express();
-var http = require('http');
-var path = require('path');
-var ejs = require('ejs');
-var async = require('async');
+var express 		= require('express'),
+	session 		= require('express-session'),
+	bodyParser 		= require('body-parser'),
+	unirest 		= require("unirest"),
+	app 			= express(),
+	http 			= require('http'),
+	path 			= require('path'),
+	ejs 			= require('ejs'),
+	async 			= require('async'),
 
 
 // modules
-var api = require('./models/api.js');
-var player = require('./models/player.js');
+api = require('./models/api.js'),
+player = require('./models/player.js');
 
 
 
 // Friends Character Info
 var fcharacter;
-
 var fcharacterInfo = [];
-
 var fgamerTag = '';
 var fcharacterOne = [];
 var fcharacterTwo = [];
