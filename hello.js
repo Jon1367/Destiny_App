@@ -25,11 +25,6 @@ var fgamerTag = '';
 var fcharacterOne = [];
 var fcharacterTwo = [];
 var fcharacterThree = [];
-/*
- 	Face Book:
- 	AppId: 804379889616035
- 	AppSerect: 3662bc272f3c540efa827618188e17a5
-*/
 
 
 //App Sets

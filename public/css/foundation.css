@@ -6383,15 +6383,15 @@ li:hover{
   margin: 0 auto;
 
 }
-.characterBanner{
-    background: red;
-    position: relative;
-    -webkit-animation: mymove 5s; /* Chrome, Safari, Opera */
+#cbanner0,#cbanner1,#cbanner2{
+
+width:400px;
+margin:0 auto;
+
 
 }
+.hide{
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes mymove {
-    from {left: 0px;}
-    to {left: 50px;}
+  display: none;
 }
+

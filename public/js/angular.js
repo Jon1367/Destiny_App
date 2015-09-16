@@ -1,21 +1,3 @@
-// .config(function ($interpolateProvider) {
-//         $interpolateProvider.startSymbol('{[{');
-//         $interpolateProvider.endSymbol('}]}');})
-
-// start foundation 
-$(document).foundation();
-
-$( "#SignIn" ).click(function() {
-
-$('#myModal').foundation('reveal', 'close');
-
-});
-$( "#SignUp" ).click(function() {
-
-$('#signUp').foundation('reveal', 'close');
-
-});
-
 // ============  Angular ===========
 var app = angular.module("destinyApp", ["firebase"]);
 
