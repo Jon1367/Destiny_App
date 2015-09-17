@@ -4,6 +4,14 @@ var app = angular.module("destinyApp", ["firebase"]);
 
 // ============  Firebase Auth ===========
 
+app.directives.app.color = function(element, name, scope) {
+    var n;
+    $(element).on('click', function() {
+        $(element).css('background-color', n?'red':'blue');
+        n = !n;
+    })
+};
+
 app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
   function($scope, $firebaseAuth) {
 	var ref = new Firebase("https://destinyapp.firebaseio.com/");

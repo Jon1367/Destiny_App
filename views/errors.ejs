@@ -1,59 +1,34 @@
- <head>
-	<meta charset="UTF-8">
-	<title>Desteny Character Explore</title>
-	<link rel="stylesheet" href="/foundation.css" type="text/css">
-</head>
+<%- include header.ejs %>
 
+<div class="container">
 
-<div class="sticky">
-    <nav class="top-bar" data-topbar role="navigation">
-        <ul class="title-area">
-            <li class="name">
-                <h1><a href="http://localhost:8080/" class="purp">Destiny Character Explorer</a></h1>
-            </li>
-        </ul>
-
-        <nav>
-            <section class="top-bar-section">
-                <ul class="right ">
-                    <li><a class="purp" href="/login">Login</a>
-                    </li>
-                    <li><a class="purp" href="/auth/facebook">FaceBook Login</a>
-                    </li>
-                    <li><a class="purp" href="/addUser">Register</a>
-                    </li>
-
-                </ul>
-            </section>
-        </nav>
-    </nav>
-</div>
-
-
-
-<div class="row error">
-    <div class="small-six large-centered columns">
-        <h3>User credentials do not match.</h3>
-        <h4>Please search again</h4>
+    <div class="row error">
+        <div class="small-six large-centered columns">
+            <h3>User credentials do not match.</h3>
+            <h4>Please search again</h4>
+        </div>
     </div>
-</div>
 
 
-<div class="row">
-    <div class="small-9 small-centered columns">
-        <form action="/processApi" method="POST">
+    <div class="row">
+        <div class="small-9 small-centered columns">
+            <form action="/processApi" method="POST">
 
-           <label>Enter Playstation Id  /  Gamertag</label>
-            <input type="text" name="gamerTag">
+               <label>Enter Playstation Id  /  Gamertag</label>
+                <input type="text" name="gamerTag">
 
-           <label for="system">Choose Platform</label>
-            <select name="system">
-                <option value="2">PS4</option>
-                <option value="1">XboxOne</option>
-            </select>
+               <label for="system">Choose Platform</label>
+                <select name="system">
+                    <option value="2">PS4</option>
+                    <option value="1">XboxOne</option>
+                </select>
 
-            <button class="button small radius" id="purple" type="submit">Submit</button>
+                <button class="button small radius" id="purple" type="submit">Submit</button>
 
-        </form>
-    </div>
-</div>
+            </form>
+        </div>
+    </div> <!-- end of Row -->
+
+</div> <!-- end of container -->
+
+<%- include footer.ejs %>

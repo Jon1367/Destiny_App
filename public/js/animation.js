@@ -8,7 +8,6 @@
 $(document).ready(function(){
 
 
-
 	// close SigIn  Modal
 	$( "#SignIn" ).click(function() {
 

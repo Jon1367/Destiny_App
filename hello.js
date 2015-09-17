@@ -61,24 +61,31 @@ app.post('/processApi', function(req, res) {
 	// Api call
 	playerOne.getDestinyInfo(playerOne.system,playerOne.gamerTag,function(result){
 
-    	sess.UserOneData = result;
-       	playerOne.data = result;
-    	sess.membershipId =	playerOne.data['data']['membershipId'];
-    	sess.characters = [];
+		// error handling
+		if(result == false){
 
-    	// storing characterID in session
-    	for (var i = 0; i < playerOne.data['data']['characters'].length ; i++) {
-    		//console.log(playerOne.data['data']['characters'][i]['characterBase']['characterId']);
-    		sess.characters.push(playerOne.data['data']['characters'][i]['characterBase']['characterId'])
-    	};
+		res.render('./views/errors');
+		}else{
 
-    	//Render Views
-		res.render('./views/profile',{
-			gamerTag : playerOne.gamerTag,
-			data : playerOne.data
-	    });
+			// Setting Session
+	    	sess.UserOneData = result;
+	       	playerOne.data = result;
+	    	sess.membershipId =	playerOne.data['data']['membershipId'];
+	    	sess.characters = [];
 
-	 });
+	    	// storing characterID in session
+	    	for (var i = 0; i < playerOne.data['data']['characters'].length ; i++) {
+	    		//console.log(playerOne.data['data']['characters'][i]['characterBase']['characterId']);
+	    		sess.characters.push(playerOne.data['data']['characters'][i]['characterBase']['characterId'])
+	    	};
+
+	    	//Render Views
+			res.render('./views/profile',{
+				gamerTag : playerOne.gamerTag,
+				data : playerOne.data
+		    });
+		}
+	});
 
 });
 

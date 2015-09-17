@@ -1,7 +1,6 @@
 var unirest = require("unirest");
 var home = require('../hello.js');
 
-
 // Constructor
 function Player() {
   // always initialize all instance properties
@@ -18,20 +17,28 @@ Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
     .end(function (response) {
 
        	var data = response.body;
-        gamerTag = data["Response"][0]["displayName"];
-        membershipId = data["Response"][0]["membershipId"];
-        systemType = data["Response"][0]["membershipType"];
 
-        
-       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
-		.type('json')
-		.end(function (response) {
-		
-       		var data2 = response.body;
-			callback(data2['Response']);
+       	// Error Handling
+       	if(data["Response"].length == 0){
+       		console.log('its empty');
+       		callback(false);
 
-		  });
+       	}else{
 
+	        gamerTag = data["Response"][0]["displayName"];
+	        membershipId = data["Response"][0]["membershipId"];
+	        systemType = data["Response"][0]["membershipType"];
+
+	        
+	       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
+			.type('json')
+			.end(function (response) {
+			
+	       		var data2 = response.body;
+				callback(data2['Response']);
+
+			  });
+		}
     });
 
 };
