@@ -1,141 +1,214 @@
 <%- include header.ejs %>
 
-<!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> -->
-
-<!-- <span data-tooltip="" aria-haspopup="true" class="has-tip" data-selector="tooltip-i9g6t32j5" aria-describedby="tooltip-i9g6t32j5" title="">Hover on desktop or touch me on mobile!</span>
- -->
-<br>
-<div style="background-color:white;">
-    <div class="large-6 columns" style="background-color:white;">
-                <h2 class="violet">Character list :<%= gamerTag %></h2>
-
-            <br>
-
-    <form action="/processCompare" method="POST">
-
-    <!--CHARACTER ONE-->
-        <div>
-            <input type="radio" id="imageIcon1" class="blah" name="character" value="0" />
-            <label for="imageIcon1">
-                <div class="imageBorder">
-                    <img class="backgroundPath1" src="http://www.bungie.net<%= character['emblemPath'] %>" width="61px">
-                    <img class="backgroundPath2" src="http://www.bungie.net<%= character['backgroundPath'] %>" width="300px">
+<div class="container">
+    <div class="row">
+       <h2 class="violet">Character Stats:</h2>
+        <h3 class="violet"><%= gamerTag %></h3>
+        <br>
 
 
-                    <span class="lvl"><b><%=character['characterLevel']%></b> </span>
-
-                    <span class="gsc"><%=character['characterBase']['grimoireScore']%>  </span>
-
-                    <span class="cls"><% if(character['characterBase']['classHash'] == '3655393761'){ %>
-    	                Titan
-    		        <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
-    	                Warlock
-    		        <% } else { %>
-    	                Hunter
-    	            <% } %> </span>
+      <!--   character div -->
+        <div id="chInfo" class="large-6 columns hide">
+            <form action="/back" method="Get">
+                <input type=""  id="imageIcon1" class="blah" name="character" value="0" />
+                <label class='moveDown' for="imageIcon1">
+                    <div class="imageBorder">
+                        <img class="backgroundPath1" src="http://www.bungie.net<%= character['emblemPath'] %>" width="61px">
+                        <img class="backgroundPath2" src="http://www.bungie.net<%= character['backgroundPath'] %>" width="300px">
 
 
-                    <span class="rceGndr"><% if(character['characterBase']['raceHash'] == '3887404748'){ %>
-                        Human
-                    <% } else if(character['characterBase']['raceHash'] == '898834093'){ %>  
-                        Exo
-                    <% } else { %>
-                        Awoken
-                    <% } %>
-                    
-                    
-                    <% if(character['characterBase']['genderType'] == 0){ %>
-    	                Male
-    		        <% } else { %>  
-    	                Female
-    	            <% } %></span>
+                        <span class="lvl"><b><%=character['characterLevel']%></b> </span>
+
+                        <span class="gsc"><%=character['characterBase']['grimoireScore']%>  </span>
+
+                        <span class="cls"><% if(character['characterBase']['classHash'] == '3655393761'){ %>
+                            Titan
+                        <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
+                            Warlock
+                        <% } else { %>
+                            Hunter
+                        <% } %> </span>
+
+
+                        <span class="rceGndr"><% if(character['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(character['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(character['characterBase']['genderType'] == 0){ %>
+                            Male
+                        <% } else { %>  
+                            Female
+                        <% } %></span>
+                        
+                    </div>
+                </label>
+                
+<!-- Character Class unHash -->
+        <span ><% if(character['characterBase']['classHash'] == '3655393761'){ %>
+
+                <div class="large-9 columns center">
+                    <img src="images/titain.jpg" alt="">
                 </div>
-            </label>
-        </div>
-        <div class="large-6 columns">
-            <ul class="images">
-            <% for(var i=0;i < 14;i++){%>
 
-        <!--     <p>   <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %></p> -->
-
-            <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName'] %>">
-            <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
-            </li>
-        <!-- 
-            <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['tierTypeName'] %></p>
-            <p><%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemTypeName'] %></p> -->
-            <% }%>
-            </ul>
-        </div>
-    </div>
-
-    <!--Friend CHARACTERS-->
-    <div class="large-6 columns" style="background-color:white;">
-                <h2 class="violet">Character list :<%= fgamerTag %></h2>
-
-
-    <!--CHARACTER ONE-->
-        <div > 
-            <input type="radio" id="fimageIcon1" class="blah" name="fcharacter" value="0" />
-            <label for="fimageIcon1">
-                <div class="imageBorder">
-                    <img class="backgroundPath1" src="http://www.bungie.net<%= fcharacter['emblemPath'] %>" width="61px">
-                    <img class="backgroundPath2" src="http://www.bungie.net<%= fcharacter['backgroundPath'] %>" width="300px">
-
-
-                    <span class="lvl"><b><%=fcharacter['characterLevel']%></b> </span>
-
-                    <span class="gsc"><%=fcharacter['characterBase']['grimoireScore']%>  </span>
-
-                    <span class="cls"><% if(fcharacter['characterBase']['classHash'] == '3655393761'){ %>
-                        Titan
-                    <% } else if(fcharacter['characterBase']['classHash'] == '2271682572'){ %>  
-                        Warlock
-                    <% } else { %>
-                        Hunter
-                    <% } %> </span>
-
-
-                    <span class="rceGndr"><% if(fcharacter['characterBase']['raceHash'] == '3887404748'){ %>
-                        Human
-                    <% } else if(fcharacter['characterBase']['raceHash'] == '898834093'){ %>  
-                        Exo
-                    <% } else { %>
-                        Awoken
-                    <% } %>
-                    
-                    
-                    <% if(fcharacter['characterBase']['genderType'] == 0){ %>
-                        Male
-                    <% } else { %>  
-                        Female
-                    <% } %></span>
+                <% } else if(character['characterBase']['classHash'] == '2271682572'){ %>  
+                <div class="large-9 columns center">
+                    <img src="images/warlock.jpg" alt="">
                 </div>
-            </label>
-        </div>
-        <div class="large-6 columns">
-            <ul class="images">
-                <% for(var i=0;i < 14;i++){%>
-
-        <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> -->
-
-        <!--     <p>   <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName'] %></p> -->
+                <% } else { %>
+                <div class="large-9 columns center">
+                    <img src="images/Hunter.jpg" alt="">
+                </div>
+        <% } %> </span>
             
-            <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemName']%> ">
-            <img src="http://www.bungie.net<%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
+            
+          
+        
+
+    <div id="chInfo2" class="large-6 columns hide">
+                <div class="panel">
+        <ul>
+            <li><strong>Defense:</strong> <%= character['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
+            <li><strong>Intellect:</strong> <%= character['characterBase']['stats']['STAT_INTELLECT']['value'] %></li>
+            <li><strong>Discipline:</strong> <%= character['characterBase']['stats']['STAT_DISCIPLINE']['value'] %></li>
+            <li><strong>Strength:</strong> <%= character['characterBase']['stats']['STAT_STRENGTH']['value'] %></li>
+            <li><strong>Armor:</strong> <%= character['characterBase']['stats']['STAT_ARMOR']['value'] %></li>
+            <li><strong>Recovery:</strong> <%= character['characterBase']['stats']['STAT_RECOVERY']['value'] %></li>
+            <li><strong>Agility:</strong> <%= character['characterBase']['stats']['STAT_AGILITY']['value'] %></li>
+        <ul>
+        </div>
+        <div>
+            <ul class="images">
+             <% for(var i=0;i < hashItem.length;i++){%>
+ 
+          <li data-tooltip class="has-tip" title="
+          <%= unHashItem[hashItem[i]['itemHash']]['itemName']%> 
+          <%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>
+          <%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>
+          ">
+
+          
+            <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['itemHash']]['icon'] %>" alt="" width="80" height="80" class="<%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>">
+ 
             </li>
 
 
+            <% }%>
+            </ul>
+        </div>  
 
-        <!--     <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['tierTypeName'] %></p>
-            <p><%= funHashItem[fhashItem[i]['items'][0]['itemHash']]['itemTypeName'] %></p> -->
+        
+            <a href="/back" class="button expand" type="submit" ≈>Choose Another Character</a>
+        </div>
+
+        </div> 
+
+      <!--  Friend  character div -->
+        <div id="chInfo" class="large-6 columns ">
+            <form action="/back" method="Get">
+                <input type=""  id="fmageIcon1" class="blah" name="character" value="0" />
+                <label class='moveDown' for="fimageIcon1">
+                    <div class="imageBorder">
+                        <img class="backgroundPath1" src="http://www.bungie.net<%= fcharacter['emblemPath'] %>" width="61px">
+                        <img class="backgroundPath2" src="http://www.bungie.net<%= fcharacter['backgroundPath'] %>" width="300px">
+
+
+                        <span class="lvl"><b><%=fcharacter['characterLevel']%></b> </span>
+
+                        <span class="gsc"><%=fcharacter['characterBase']['grimoireScore']%>  </span>
+
+                        <span class="cls"><% if(fcharacter['characterBase']['classHash'] == '3655393761'){ %>
+                            Titan
+                        <% } else if(fcharacter['characterBase']['classHash'] == '2271682572'){ %>  
+                            Warlock
+                        <% } else { %>
+                            Hunter
+                        <% } %> </span>
+
+
+                        <span class="rceGndr"><% if(fcharacter['characterBase']['raceHash'] == '3887404748'){ %>
+                            Human
+                        <% } else if(fcharacter['characterBase']['raceHash'] == '898834093'){ %>  
+                            Exo
+                        <% } else { %>
+                            Awoken
+                        <% } %>
+                        
+                        
+                        <% if(fcharacter['characterBase']['genderType'] == 0){ %>
+                            Male
+                        <% } else { %>  
+                            Female
+                        <% } %></span>
+                        
+                    </div>
+                </label>
+                
+<!-- Character Class unHash -->
+        <span ><% if(fcharacter['characterBase']['classHash'] == '3655393761'){ %>
+
+                <div class="large-9 columns center">
+                    <img src="images/titain.jpg" alt="">
+                </div>
+
+                <% } else if(fcharacter['characterBase']['classHash'] == '2271682572'){ %>  
+                <div class="large-9 columns center">
+                    <img src="images/warlock.jpg" alt="">
+                </div>
+                <% } else { %>
+                <div class="large-9 columns center">
+                    <img src="images/Hunter.jpg" alt="">
+                </div>
+        <% } %> </span>
+            
+            
+          
+        
+
+    <div id="chInfo2" class="large-6 columns">
+                <div class="panel">
+        <ul>
+            <li><strong>Defense:</strong> <%= fcharacter['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
+            <li><strong>Intellect:</strong> <%= fcharacter['characterBase']['stats']['STAT_INTELLECT']['value'] %></li>
+            <li><strong>Discipline:</strong> <%= fcharacter['characterBase']['stats']['STAT_DISCIPLINE']['value'] %></li>
+            <li><strong>Strength:</strong> <%= fcharacter['characterBase']['stats']['STAT_STRENGTH']['value'] %></li>
+            <li><strong>Armor:</strong> <%= fcharacter['characterBase']['stats']['STAT_ARMOR']['value'] %></li>
+            <li><strong>Recovery:</strong> <%= fcharacter['characterBase']['stats']['STAT_RECOVERY']['value'] %></li>
+            <li><strong>Agility:</strong> <%= fcharacter['characterBase']['stats']['STAT_AGILITY']['value'] %></li>
+        <ul>
+        </div>
+        <div>
+            <ul class="images">
+             <% for(var i=0;i < fhashItem.length;i++){%>
+ 
+          <li data-tooltip class="has-tip" title="
+          <%= funHashItem[fhashItem[i]['itemHash']]['itemName']%> 
+          <%= funHashItem[fhashItem[i]['itemHash']]['tierTypeName']%>
+          <%= funHashItem[fhashItem[i]['itemHash']]['tierTypeName']%>
+          ">
+
+          
+            <img src="http://www.bungie.net<%= funHashItem[fhashItem[i]['itemHash']]['icon'] %>" alt="" width="80" height="80" class="<%= funHashItem[fhashItem[i]['itemHash']]['tierTypeName']%>">
+ 
+            </li>
+
 
             <% }%>
             </ul>
+        </div>  
+
         </div>
-    </div>
-    </form>
+
+        </div> 
 
 
+
+    </div> <!-- End of Row -->
+</div>
+
+    
 <%- include footer.ejs %>
-

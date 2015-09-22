@@ -1,0 +1,216 @@
+/*============ My Class =========*/
+.white{
+
+  color:#fff;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight:200;
+}
+
+a[class='purp'] {
+  color:#fff!important;
+
+}
+
+button[id='purple'] {
+    background-color: #B23AEE;
+}
+nav {
+    margin-bottom: 10px !important;
+
+}
+a {
+  color:white;
+}
+
+li > a:hover{
+  color:#B23AEE;
+}
+
+.showme {
+    border: 1px solid black;   
+}
+.violet{
+  font-family: Helvetica, sans-serif;
+  color:#564ABC;
+  font-weight:400;
+  text-align:center;
+}
+
+/*CHARACTER CHOICES STYLING*/
+input[id='imageIcon0']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='imageIcon1']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='imageIcon2']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon0']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon1']{
+    visibility: hidden;
+    position: absolute;
+}
+input[id='fimageIcon2']{
+    visibility: hidden;
+    position: absolute;
+}
+.imageBorder {
+    display: block;
+    position: relative;
+}
+.cls {
+    font-size: 18px;
+    color: White;
+    position: absolute;
+    top: 6px;
+    left: 72px;
+}
+.rceGndr {
+    font-size: 14px;
+    color: White;
+    position: absolute;
+    top: 32px;
+    left: 72px;
+}
+.lvl {
+    color: yellow;
+    position: absolute;
+    top: 8px;
+    left: 338px;
+}
+.gsc {
+    color: white;
+    position: absolute;
+    top: 32px;
+    left: 322px;
+}
+div > label {
+     margin-bottom: 20px !important;   
+}
+.error {
+     margin-bottom: 40px;   
+}
+
+body {
+     background-color: #F5F5F5;   
+}
+
+footer {
+    font-size: 13px;
+    color: #B23AEE;
+}
+.moveDown {
+     margin-bottom: 30px;   
+}
+.grayOut {
+     color: #fff;   
+}
+/*============ Image Icons =========*/
+
+input[id='imageIcon0']:checked + label[for='imageIcon0'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='imageIcon1']:checked + label[for='imageIcon1'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='imageIcon2']:checked + label[for='imageIcon2'] > div{
+  border:3px solid #B23AEE !important;
+}
+
+input[id='fimageIcon0']:checked + label[for='fimageIcon0'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='fimageIcon1']:checked + label[for='fimageIcon1'] > div{
+  border:3px solid #B23AEE !important;
+}
+input[id='fimageIcon2']:checked + label[for='fimageIcon2'] > div{
+  border:3px solid #B23AEE !important;
+}
+ul[class="characters"] > li{
+
+  display: inline-block;
+}
+.images > li{
+
+  display: inline-block;
+}
+img[src="/images/header.jpg"]{
+
+  opacity: .9;
+
+}
+ul > li{
+
+  display: inline-block;
+}
+.parallax-background{
+  height: 620px;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+
+}
+.parallax-content {
+  max-width: 100%;
+  position: relative;
+  top: 500px;
+  padding: 50px;
+  font-size: 20px;
+  background-color: #fff;
+}              
+li:hover{
+  cursor: pointer;
+}
+.mleft{
+  margin-left:60px;
+}
+.center{
+  margin: 0 auto;
+
+}
+#cbanner0,#cbanner1,#cbanner2{
+
+width:400px;
+margin:0 auto;
+
+
+}
+.hide{
+
+  display: none;
+}
+img[class="Common"]{
+  opacity:50%;
+
+  border: 5px solid gray;
+
+}
+img[class="Uncommon"]{
+  opacity:50%;
+  border: 5px solid green;
+
+}img[class="Rare"]{
+  opacity:50%;
+  border: 5px solid blue;
+
+}img[class="Legendary"]{
+  opacity:50%;
+  border: 5px solid #72467F;
+
+}img[class="Exotic"]{
+  opacity:50%;
+  border: 5px solid #FFF800;
+
+}

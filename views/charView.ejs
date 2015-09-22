@@ -84,13 +84,17 @@
         </div>
         <div>
             <ul class="images">
-             <% for(var i=0;i < 10;i++){%>
-            <li data-tooltip aria-haspopup="true" class="has-tip"  title=" <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemName']%>
-             &#13;&#10;  
-             <%= unHashItem[hashItem[i]['items'][0]['itemHash']]['itemDescription'] %>">
-        
-            <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['items'][0]['itemHash']]['icon'] %>" alt="" width="80" height="80">
-            
+             <% for(var i=0;i < hashItem.length;i++){%>
+ 
+          <li data-tooltip class="has-tip" title="
+          <%= unHashItem[hashItem[i]['itemHash']]['itemName']%> 
+          <%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>
+          <%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>
+          ">
+
+          
+            <img src="http://www.bungie.net<%= unHashItem[hashItem[i]['itemHash']]['icon'] %>" alt="" width="80" height="80" class="<%= unHashItem[hashItem[i]['itemHash']]['tierTypeName']%>">
+ 
             </li>
 
 

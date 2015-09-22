@@ -98,13 +98,13 @@ app.post('/viewCharacter', function(req, res) {
 	var sData = sess.UserOneData;
 
 
-	playerOne.getCharacterInfo(sess.system,sess.membershipId,sess.characters[characterchoose] ,function(result){
+
+	playerOne.getDestinyInfo(sess.system,sess.gamerTag,function(result){
 	console.log('==============   Character API  ==============');
 
-		console.log(result);
-		var hashItem = result['data']['buckets']['Equippable'];
+		//console.log(result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment']);
+		var hashItem = result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment'];
 		var unHashItem =   result['definitions']['items'];
-
 
 		res.render('./views/charView',{
 			gamerTag : sess.gamerTag,
@@ -128,57 +128,86 @@ app.get('/friend', function(req, res) {
 	var gamerTag = sess.gamerTag;
 
 	res.render('./views/friend',{gamerTag:gamerTag,
-	characterOne : sess.UserOneData['data']['characters'][0],
-	characterTwo: sess.UserOneData['data']['characters'][1],
-	characterThree : sess.UserOneData['data']['characters'][2]
+		data : sess.UserOneData
  	});
 
 });
 
 app.post('/processFriendApi', function(req, res) {
 
-	var data;
+	var sess = req.session;
+	var playerTwo = new player();
+	// Form Data
+	playerTwo.gamerTag = req.body.gamerTag;
+	playerTwo.system = req.body.system;
 
-	var friendGamerTag = req.body.gamerTag;
-	var fsystem = req.body.system;
+	// Setting Sessions
+	sess = req.session;
+	sess.fgamerTag = playerTwo.gamerTag;
+	sess.fsystem = playerTwo.system;
 
-	var nplayer = new player(friendGamerTag,fsystem);
 
-	api.apiOne(fsystem,friendGamerTag,function(result){
 
-        //console.log(typeof(result));
-//        console.log(result);
-        
-        if (result == 55) {
-            res.render('./views/errors');       
-        } else {
-        
-		data = result['data']['characters'];
-		console.log('++++++++++ Friend Api +++++++++');
+	// Api call
+	playerTwo.getDestinyInfo(playerTwo.system ,playerTwo.gamerTag ,function(result){
 
+		console.log('++++++++++++ playerTwo data +++++++++++++++++');
 		console.log(result);
-        
 
-		fcharacterOne = data[0];
-		fcharacterTwo = data[1];
-		fcharacterThree = data[2];
+		// error handling
+		if(result == false){
 
-		for (var i = 0; i <= 2; i++) {
-			fcharacterInfo.push(data[i]);
-		};
+		res.render('./views/errors');
+		}else{
+
+			// Setting Session
+	    	sess.UserTwoData = result;
+	       	playerTwo.data = result;
+	    	sess.membershipId2 =	playerTwo.data['data']['membershipId'];
+	    	sess.characters2 = [];
+
+	    	// storing characterID in session
+	    	for (var i = 0; i < playerTwo.data['data']['characters'].length ; i++) {
+	    		//console.log(playerOne.data['data']['characters'][i]['characterBase']['characterId']);
+	    		sess.characters2.push(playerTwo.data['data']['characters'][i]['characterBase']['characterId']);
+	    	};
+
+	    	console.log('++++++++++++ Sesssions +++++++++++++++++');
+			console.log(sess);
+
+	    	//Render Views
+			// res.render('./views/profile',{
+			// 	gamerTag : playerOne.gamerTag,
+			// 	data : playerTwo.data
+		 //    });
+		}
+
+	});
+
+	var playerOne = new player();
+	characterchoose = req.body.character;
+
+	//var sData = sess.UserOneData;
 
 
-		res.render('./views/compare',{gamerTag:gamerTag,
-			characterOne : characterOne,
-			characterTwo:characterTwo,
-			characterThree : characterThree,
-			fgamerTag:fgamerTag,
-			fcharacterOne : fcharacterOne,
-			fcharacterTwo: fcharacterTwo,
-			fcharacterThree : fcharacterThree
-          });
-        }
-                   
+
+	playerOne.getDestinyInfo(sess.system,sess.gamerTag,function(result){
+	console.log('==============   Character API  ==============');
+	//console.log(result['data']);
+
+
+		// //console.log(result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment']);
+		// var hashItem = result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment'];
+		// var unHashItem =   result['definitions']['items'];
+
+		res.render('./views/compare',{
+			gamerTag : sess.gamerTag,
+			fgamerTag : playerTwo.gamerTag  ,
+			data : result,
+			data2 : playerTwo.data
+
+	    });
+
 
 	});
 
@@ -199,90 +228,98 @@ app.post('/processCompare', function(req, res) {
 	var cOne = req.body.character
 	var cTwo = req.body.fcharacter;
 
-	// console.log("character Choice");
-	// console.log(cOne);
-	// console.log(cTwo);
+	var sess = req.session;
+	var playerTwo = new player();
+	// Form Data
+	playerTwo.gamerTag = sess.fgamerTag;
+	playerTwo.system = sess.fsystem;
 
-	var characterId = characterInfo[cOne]['characterBase']['characterId'];
-	var memberId = characterInfo[cOne]['characterBase']['membershipId'];
-	var system = characterInfo[cOne]['characterBase']['membershipType'];
-
-	var fcharacterId = characterInfo[cTwo]['characterBase']['characterId'];
-	var fmemberId = characterInfo[cTwo]['characterBase']['membershipId'];
-	var fsystem = characterInfo[cTwo]['characterBase']['membershipType'];
-
-	api.characterInfo(memberId,characterId,system,function(result){
-
-		// console.log('==============   Hash Character Items ==============');
-		// console.log(result['Response']['data']['buckets']['Equippable']);
-		// console.log('==============   unHash Equippable ==============');
-		// console.log(result['Response']['definitions']['items']);
-
-		//console.log(result['Response']['data']['buckets']['Equippable'][0]['items'][0]['itemHash']);
-		//console.log(result['Response']['definitions']['items']['250113089']['icon']);
+	// Setting Sessions
+	sess = req.session;
+	sess.fgamerTag = playerTwo.gamerTag;
+	sess.fsystem = playerTwo.system;
 
 
 
+	// Api call
+	playerTwo.getDestinyInfo(playerTwo.system ,playerTwo.gamerTag ,function(result){
 
-		var unHashItem  = result['Response']['definitions']['items'];
-		var hashItem= result['Response']['data']['buckets']['Equippable'];
+		console.log('++++++++++++ playerTwo data +++++++++++++++++');
+		console.log('player Two');
+
+		// error handling
+		if(result == false){
+
+		res.render('./views/errors');
+		}else{
+
+			// Setting Session
+	    	sess.UserTwoData = result;
+	       	playerTwo.data = result;
+	    	sess.membershipId2 =	playerTwo.data['data']['membershipId'];
+	    	sess.characters2 = [];
+	    	 fhashItem = result['data']['characters'][cTwo]['characterBase']["peerView"]['equipment'];
+		 	 funHashItem =   result['definitions']['items'];
 
 
 
-		api.characterInfo(fmemberId,fcharacterId,fsystem,function(result){
+	  //   	console.log('++++++++++++ Sesssions +++++++++++++++++');
+			// console.log(sess);
+
+	    	//Render Views
+			// res.render('./views/profile',{
+			// 	gamerTag : playerOne.gamerTag,
+			// 	data : playerTwo.data
+		 //    });
+		}
+
+			var playerOne = new player();
+	characterchoose = req.body.character;
+
+	var sData = sess.UserOneData;
+	var sData2 = sess.UserTwoData;
 
 
-			var funHashItem  = result['Response']['definitions']['items'];
-			var fhashItem= result['Response']['data']['buckets']['Equippable'];
 
 
-			res.render('./views/charCompare',{gamerTag:gamerTag,
-					character : characterInfo[cOne],
-					fgamerTag: fgamerTag,
-					fcharacter : fcharacterInfo[cTwo],
-					hashItem : hashItem,
-	 				unHashItem : unHashItem,
-					fhashItem : fhashItem,
-	 				funHashItem : funHashItem
-		        });
+	playerOne.getDestinyInfo(sess.system,sess.gamerTag,function(result){
+	console.log('==============   Character API  ==============');
+	console.log('PlayerOne');
 
-		});
+
+		// //console.log(result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment']);
+		 var hashItem = result['data']['characters'][cOne]['characterBase']["peerView"]['equipment'];
+		 var unHashItem =   result['definitions']['items'];
+
+
+
+		res.render('./views/charCompare',{
+			gamerTag : sess.gamerTag,
+			gamerTag : sess.fgamerTag,
+			character : sData['data']['characters'][cOne],
+			fcharacter : sData2['data']['characters'][cTwo],
+			hashItem : hashItem ,
+			unHashItem : unHashItem ,
+			fhashItem : fhashItem,
+			funHashItem : funHashItem
+	    });
 
 	});
+
+
+	});
+
+
+
+
+
 
 
 });
 
 /*=============   DataBase CRUD unFinish   =============*/
 
-app.get('/login', function(req, res) {
 
-    res.render('./views/form');
-
-});
-
-app.get('/addUser', function(req, res) {
-
-	res.render('./views/addUser');
-
-});
-
-app.post('/processAdd', function(req, res) {
-
-	 var name = req.body.name;
-	 var password = req.body.password;
-     var gamertag = req.body.gamertag;
-	 var system = req.body.system;
-
-	 sess = req.session;
-	 sess.name = name;
-
-
-
-    res.redirect('/');
-
-
-});
 app.get('/logout', function(req, res) {
     sess = null;
     
