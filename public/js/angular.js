@@ -2,36 +2,28 @@
 var app = angular.module("destinyApp", ["firebase"]);
 
 
-// ============  Firebase Auth ===========
 
-app.directives.app.color = function(element, name, scope) {
-    var n;
-    $(element).on('click', function() {
-        $(element).css('background-color', n?'red':'blue');
-        n = !n;
-    })
-};
 
 app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
   function($scope, $firebaseAuth) {
 	var ref = new Firebase("https://destinyapp.firebaseio.com/");
 
-    auth = $firebaseAuth(ref);
+    var Auth = $firebaseAuth(ref);
+    $scope.userShow;
 
     $scope.signIn = function() {
 
-	var ref = new Firebase("https://destinyapp.firebaseio.com/");
-		ref.authWithPassword({
+	//var ref = new Firebase("https://destinyapp.firebaseio.com/");
+		Auth.$authWithPassword({
 		  "email": $scope.email,
 		  "password": $scope.password
-		}, function(error, authData) {
-		  if (error) {
-		    console.log("Login Failed!", error);
-		  } else {
-		    console.log("Authenticated successfully with payload:", authData);
-		  }
-		});
-
+		}).then(function(data) {
+		  	$scope.userShow=1;
+		  	$scope.userData = data;
+		    console.log("Authenticated successfully with payload:", data);
+		  }).catch(function(error){
+		  	console.log(error);
+		  });
     };
   }
 ]);

@@ -12,53 +12,65 @@
     
 </head>
 <body  ng-app="destinyApp">
-<div class="fixed">
-     <nav class="top-bar" data-topbar role="navigation">
-        <ul class="title-area">
-            <li class="name">
-          <h1><a href="/" class="purp">Destiny Character Explorer</a></h1>
-            </li>
-        </ul>
-            <section class="top-bar-section">
-              <ul class="right ">
-                <li class="has-form">
-                  <a data-reveal-id="signUp">Sign Up</a>
-                </li>
-                <li class="has-form">
-                  <a class="button" data-reveal-id="myModal">Login</a>
-                </li>
-              </ul>   
-            </section>
-      </nav>
-</div>
-<!-- End of Nav  -->
+<div ng-controller="AuthCtrl">
+  <div class="fixed">
+       <nav class="top-bar" data-topbar role="navigation">
+          <ul class="title-area">
+              <li class="name">
+            <h1><a href="/" class="purp">Destiny Character Explorer</a></h1>
+              </li>
+          </ul>
+              <section class="top-bar-section" >
+              <div ng-hide="userData">
+                <ul class="right ">
+                <li><a href="/forms">Forms</a></li>
+                  <li class="has-form">
+                    <a data-reveal-id="signUp">Sign Up</a>
+                  </li>
+                  <li class="has-form">
+                    <a class="button" data-reveal-id="myModal">Login</a>
+                  </li>
 
-  <!-- Modals -->
-<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <br>
-  <br>
-  <form ng-controller="AuthCtrl">
-    <input type="text" name="email" placeholder="Enter Email" ng-model="email">
-    <input type="text" name="password" placeholder-="Enter password" ng-model="password">
-    <input id="SignIn" type="submit" aria-label="Close" class="button expand" ng-click="signIn()">
-  </form>
+              </div>
+              
+              <span ng-show="userData">
+              {{userData.password.email}}
+              <button type="submit" class="btn btn-default">Sign Out</button>
+            </span>
+          </ul>
+              </section>
 
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
+        </nav>
+  </div>
+  <!-- End of Nav  -->
 
-<div id="signUp" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <form ng-controller="addUser">
+    <!-- Modals -->
+  <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <br>
-  <br>
-    <input type="text" name="email" placeholder="Enter Email" ng-model="email">
-    <input type="text" name="password" placeholder-="Enter password" ng-model="password">
-    <input type="text" name="gamerTag" placeholder-="GamerTag" ng-model="gamerTag">
-    <select name="system" ng-model="system">
-        <option value="2">PS4</option>
-        <option value="1">XboxOne</option>
-    </select>
-    <input id="SignUp" type="submit" aria-label="Close" class="button expand" ng-click="signUp()">
-  </form>
+    <br>
+    <form>
+      <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+      <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+      <input id="SignIn" type="submit" aria-label="Close" class="button expand" ng-click="signIn()">
+    </form>
 
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="signUp" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <form ng-controller="addUser">
+      <br>
+    <br>
+      <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+      <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+      <input type="text" name="gamerTag" placeholder-="GamerTag" ng-model="gamerTag">
+      <select name="system" ng-model="system">
+          <option value="2">PS4</option>
+          <option value="1">XboxOne</option>
+      </select>
+      <input id="SignUp" type="submit" aria-label="Close" class="button expand" ng-click="signUp()">
+    </form>
+
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
 </div>

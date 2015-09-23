@@ -45,6 +45,11 @@ app.get('/', function(req,res){
 		res.render('./views/layout');
 
 });
+app.get('/', function(req,res){
+
+		res.render('./views/forms');
+
+});
 app.post('/processApi', function(req, res) {
 
 	var playerOne = new player();
