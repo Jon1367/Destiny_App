@@ -4,12 +4,16 @@ var app = angular.module("destinyApp", ["firebase"]);
 
 
 
-app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
-  function($scope, $firebaseAuth) {
+app.controller("AuthCtrl", ["$scope", "$firebaseObject","$firebaseAuth",
+  function($scope,$firebaseObject ,$firebaseAuth) {
 	var ref = new Firebase("https://destinyapp.firebaseio.com/");
+
 
     var Auth = $firebaseAuth(ref);
     $scope.userShow;
+
+
+
 
     $scope.signIn = function() {
 
@@ -26,6 +30,34 @@ app.controller("AuthCtrl", ["$scope", "$firebaseAuth",
 		  });
     };
   }
+]);
+app.controller("chatCtrl", ["$scope", "$firebaseArray",
+        function($scope, $firebaseArray) {
+          //CREATE A FIREBASE REFERENCE
+          var ref = new Firebase("https://destinyapp.firebaseio.com/messages");
+
+          // GET MESSAGES AS AN ARRAY
+          $scope.messages = $firebaseArray(ref);
+
+          //ADD MESSAGE METHOD
+          $scope.addMessage = function(e) {
+
+            //LISTEN FOR RETURN KEY
+            if (e.keyCode === 13 && $scope.msg) {
+              //ALLOW CUSTOM OR ANONYMOUS USER NAMES
+              var name = $scope.name || "anonymous";
+
+              //ADD TO FIREBASE
+              $scope.messages.$add({
+                from: name,
+                body: $scope.msg
+              });
+
+              //RESET MESSAGE
+              $scope.msg = "";
+            }
+          }
+        }
 ]);
 
 // ============  Add Firebase User ===========

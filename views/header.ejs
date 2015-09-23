@@ -21,8 +21,8 @@
               </li>
           </ul>
               <section class="top-bar-section" >
-              <div ng-hide="userData">
-                <ul class="right ">
+
+                <ul class="right " ng-hide="userData">
                 <li><a href="/forms">Forms</a></li>
                   <li class="has-form">
                     <a data-reveal-id="signUp">Sign Up</a>
@@ -31,17 +31,25 @@
                     <a class="button" data-reveal-id="myModal">Login</a>
                   </li>
 
-              </div>
+                </ul>
+              <ul class="right " ng-show="userData">
+              <li><a href="/forms">Forms</a></li>
+              <li lass="name">
+            <a href="/">{{userData.password.email}}</a>
+
               
-              <span ng-show="userData">
-              {{userData.password.email}}
-              <button type="submit" class="btn btn-default">Sign Out</button>
-            </span>
-          </ul>
+              </li>
+              <li class="has-form">
+            <a class="button">LogOut</a>  
+              </li>
+            </ul>
               </section>
 
         </nav>
+
   </div>
+
+ 
   <!-- End of Nav  -->
 
     <!-- Modals -->

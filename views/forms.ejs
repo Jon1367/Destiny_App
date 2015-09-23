@@ -1,27 +1,148 @@
-<%- include header.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Destiny Character Explorer</title>
+    <link rel="stylesheet" href="./css/foundation.css" type="text/css">
+    <link rel="stylesheet" href="./css/animate.css" type="text/css">
+    <link rel="stylesheet" href="./css/characters.css" type="text/css">
+
+
+
+    
+</head>
+<body  ng-app="destinyApp">
+<div ng-controller="AuthCtrl">
+  <div class="fixed">
+       <nav class="top-bar" data-topbar role="navigation">
+          <ul class="title-area">
+              <li class="name">
+            <h1><a href="/" class="purp">Destiny Character Explorer</a></h1>
+              </li>
+          </ul>
+              <section class="top-bar-section" >
+
+                <ul class="right " ng-hide="userData">
+                <li><a href="/forms">Forms</a></li>
+                  <li class="has-form">
+                    <a data-reveal-id="signUp">Sign Up</a>
+                  </li>
+                  <li class="has-form">
+                    <a class="button" data-reveal-id="myModal">Login</a>
+                  </li>
+
+                </ul>
+              <ul class="right " ng-show="userData">
+              <li><a href="/forms">Forms</a></li>
+              <li lass="name">
+            <a href="/">{{userData.password.email}}</a>
+
+              
+              </li>
+              <li class="has-form">
+            <a class="button">LogOut</a>  
+              </li>
+            </ul>
+              </section>
+
+        </nav>
+
+  </div>
+
+ 
+  <!-- End of Nav  -->
+
+    <!-- Modals -->
+  <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <br>
+    <br>
+    <form>
+      <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+      <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+      <input id="SignIn" type="submit" aria-label="Close" class="button expand" ng-click="signIn()">
+    </form>
+
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div id="signUp" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <form ng-controller="addUser">
+      <br>
+    <br>
+      <input type="text" name="email" placeholder="Enter Email" ng-model="email">
+      <input type="text" name="password" placeholder-="Enter password" ng-model="password">
+      <input type="text" name="gamerTag" placeholder-="GamerTag" ng-model="gamerTag">
+      <select name="system" ng-model="system">
+          <option value="2">PS4</option>
+          <option value="1">XboxOne</option>
+      </select>
+      <input id="SignUp" type="submit" aria-label="Close" class="button expand" ng-click="signUp()">
+    </form>
+
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+</div>
 
 
 
 
 
+<div class="econtainer" ng-controller="chatCtrl">
+
+    <!-- CHAT MARKUP -->
+    <div class="row">
+    	<div lass="large-6 large-centered columns">
+
+	      <header>Firebase Chat Demo</header>
+
+	      <div class="example-chat-toolbar">
+	        <label for="nameInput">Username:</label>
+	        <input ng-model="name" type="text" id="nameInput" placeholder="enter a username...">
+	      </div>
+
+	      <ul id="example-messages" class="example-chat-messages">
+	        <li ng-repeat="msg in messages">
+	          <strong class="example-chat-username">{{ msg.from }}</strong>
+	          {{ msg.body }}
+	        </li>
+	      </ul>
+
+	      <footer>
+	        <input ng-model="msg" ng-keydown="addMessage($event)" type="text" id="messageInput"  placeholder="Type a message...">
+	      </footer>
+
+    	</div> <!-- end of row -->
+ 	</div>
+ </div>
 
 
 
 
+        <footer style="bottom: 0px; height: 40px; line-height: 40px;" class="large-12 columns text-center">
+        <div class="violet">|&nbsp;&nbsp;  Created &nbsp;&nbsp; by &nbsp;&nbsp; J.O &nbsp;&nbsp; & &nbsp;&nbsp; A.R &nbsp;&nbsp; | </div>
+    </footer>
 
 
 
 
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+    </script>
+    <script type="text/javascript" src="./js/animation.js"></script>
+    <script type="text/javascript" src="./js/angular.js"></script>
+
+
+<script>
+    $(document).foundation();
+</script>
 
 
 
-
-
-
-
-
-
-
-
-
-<%- include footer.ejs %>
+</body>
+</html>
