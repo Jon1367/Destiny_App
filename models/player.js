@@ -11,19 +11,21 @@ function Player() {
 // class methods
 Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
 
+	var apiKey = '037e61ce4a9f42c5b6c3b19e872e4ff9';
+
 
 	unirest.get('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/'+system+'/'+gamerTag)
     .type('json')
+    .header('X-API-Key',apiKey)
     .end(function (response) {
-
        	var data = response.body;
+    	console.log(data);
 
-       	// Error Handling
+       	//Error Handling
        	if(data["Response"].length == 0){
        		console.log('its empty');
        		callback(false);
-
-       	}else{
+}else{
 
 	        gamerTag = data["Response"][0]["displayName"];
 	        membershipId = data["Response"][0]["membershipId"];
@@ -31,10 +33,12 @@ Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
 
 	        
 	       	unirest.get('http://www.bungie.net/Platform/Destiny/'+system+'/Account/'+membershipId+'/?definitions=true')
+	       	 .header('X-API-Key',apiKey)
 			.type('json')
 			.end(function (response) {
-			
+				
 	       		var data2 = response.body;
+	       		console.log(data2);
 				callback(data2['Response']);
 
 			  });
