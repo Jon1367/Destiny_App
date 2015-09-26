@@ -214,3 +214,8 @@ img[class="Uncommon"]{
   border: 5px solid #FFF800;
 
 }
+progress {
+  width: 100%;
+
+  background-color: #F04345;  \
+}

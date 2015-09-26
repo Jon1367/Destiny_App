@@ -38,6 +38,22 @@ app.use(express.static(__dirname + '/public'));
 
 
 
+async.parallel({
+    one: function(callback) {
+        callback(null, 'abc\n');
+    },
+    two: function(callback) {
+        callback(null, 'xyz\n');
+    }
+}, function(err, results) {
+    // results is now equals to: {one: 'abc\n', two: 'xyz\n'}
+    console.log(results);
+});
+
+
+
+
+
 /*=============   Routes   =============*/
 
 app.get('/', function(req,res){
@@ -105,7 +121,7 @@ app.post('/viewCharacter', function(req, res) {
 
 
 	playerOne.getDestinyInfo(sess.system,sess.gamerTag,function(result){
-	console.log('==============   Character API  ==============');
+	//console.log('==============   Character API  ==============');
 
 		//console.log(result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment']);
 		var hashItem = result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment'];
@@ -156,8 +172,8 @@ app.post('/processFriendApi', function(req, res) {
 	// Api call
 	playerTwo.getDestinyInfo(playerTwo.system ,playerTwo.gamerTag ,function(result){
 
-		console.log('++++++++++++ playerTwo data +++++++++++++++++');
-		console.log(result);
+		//console.log('++++++++++++ playerTwo data +++++++++++++++++');
+		//console.log(result);
 
 		// error handling
 		if(result == false){
@@ -177,8 +193,8 @@ app.post('/processFriendApi', function(req, res) {
 	    		sess.characters2.push(playerTwo.data['data']['characters'][i]['characterBase']['characterId']);
 	    	};
 
-	    	console.log('++++++++++++ Sesssions +++++++++++++++++');
-			console.log(sess);
+	    	//console.log('++++++++++++ Sesssions +++++++++++++++++');
+			//console.log(sess);
 
 	    	//Render Views
 			// res.render('./views/profile',{
@@ -244,13 +260,21 @@ app.post('/processCompare', function(req, res) {
 	sess.fgamerTag = playerTwo.gamerTag;
 	sess.fsystem = playerTwo.system;
 
+	var sData = sess.UserOneData;
+	var sData2 = sess.UserTwoData;
+	var playerOne = new player();
+	var characterchoose = req.body.character;
 
+async.parallel({
+    one: function(callback) {
 
 	// Api call
 	playerTwo.getDestinyInfo(playerTwo.system ,playerTwo.gamerTag ,function(result){
 
 		console.log('++++++++++++ playerTwo data +++++++++++++++++');
-		console.log('player Two');
+		//console.log('player Two');
+
+
 
 		// error handling
 		if(result == false){
@@ -266,41 +290,55 @@ app.post('/processCompare', function(req, res) {
 	    	 fhashItem = result['data']['characters'][cTwo]['characterBase']["peerView"]['equipment'];
 		 	 funHashItem =   result['definitions']['items'];
 
-
-
-	  //   	console.log('++++++++++++ Sesssions +++++++++++++++++');
-			// console.log(sess);
-
-	    	//Render Views
-			// res.render('./views/profile',{
-			// 	gamerTag : playerOne.gamerTag,
-			// 	data : playerTwo.data
-		 //    });
+ 			callback(null, result);
 		}
 
-			var playerOne = new player();
-	characterchoose = req.body.character;
+       
+	});
 
-	var sData = sess.UserOneData;
-	var sData2 = sess.UserTwoData;
-
+    },
+    two: function(callback) {
 
 
 
 	playerOne.getDestinyInfo(sess.system,sess.gamerTag,function(result){
-	console.log('==============   Character API  ==============');
-	console.log('PlayerOne');
+	console.log('==============  PlayerOne Data ==============');
+	//console.log('PlayerOne');
+		// error handling
+		if(result == false){
 
+		res.render('./views/errors');
+		}else{
 
 		// //console.log(result['data']['characters'][characterchoose]['characterBase']["peerView"]['equipment']);
 		 var hashItem = result['data']['characters'][cOne]['characterBase']["peerView"]['equipment'];
 		 var unHashItem =   result['definitions']['items'];
 
+  setTimeout(function(){
+    // It's been 3 seconds, alert via callback
+	console.log('==============  Timeout ==============');
+
+ 		callback(null, result);
+
+    callback();
+  }, 3000);
+
+ 		}
+
+
+	});
+
+  
+    }
+}, function(err, results) {
+    // results is now equals to: {one: 'abc\n', two: 'xyz\n'}
+	console.log('==============  Done ==============');
+	console.log(results);
 
 
 		res.render('./views/charCompare',{
 			gamerTag : sess.gamerTag,
-			gamerTag : sess.fgamerTag,
+			fgamerTag : sess.fgamerTag,
 			character : sData['data']['characters'][cOne],
 			fcharacter : sData2['data']['characters'][cTwo],
 			hashItem : hashItem ,
@@ -308,11 +346,15 @@ app.post('/processCompare', function(req, res) {
 			fhashItem : fhashItem,
 			funHashItem : funHashItem
 	    });
+});
 
-	});
 
 
-	});
+
+
+
+
+
 
 
 

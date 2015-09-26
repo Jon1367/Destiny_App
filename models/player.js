@@ -19,7 +19,7 @@ Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
     .header('X-API-Key',apiKey)
     .end(function (response) {
        	var data = response.body;
-    	console.log(data);
+    	//console.log(data);
 
        	//Error Handling
        	if(data["Response"].length == 0){
@@ -38,7 +38,7 @@ Player.prototype.getDestinyInfo= function(system,gamerTag,callback) {
 			.end(function (response) {
 				
 	       		var data2 = response.body;
-	       		console.log(data2);
+	       		//console.log(data2);
 				callback(data2['Response']);
 
 			  });

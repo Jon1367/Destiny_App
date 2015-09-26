@@ -2,13 +2,13 @@
 
 <div class="container">
     <div class="row">
-       <h2 class="violet">Character Stats:</h2>
-        <h3 class="violet"><%= gamerTag %></h3>
-        <br>
-
 
       <!--   character div -->
-        <div id="chInfo" class="large-6 columns hide">
+        <div id="chInfo" class="large-6 columns">
+        <h2 class="violet text-center">Character Stats:</h2>
+        <h3 class="violet text-center"><%= gamerTag %></h3>
+        <br>
+
             <form action="/back" method="Get">
                 <input type=""  id="imageIcon1" class="blah" name="character" value="0" />
                 <label class='moveDown' for="imageIcon1">
@@ -69,7 +69,7 @@
           
         
 
-    <div id="chInfo2" class="large-6 columns hide">
+    <div id="chInfo2" class="large-10 columns">
                 <div class="panel">
         <ul>
             <li><strong>Defense:</strong> <%= character['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
@@ -101,16 +101,17 @@
             </ul>
         </div>  
 
-        
-            <a href="/back" class="button expand" type="submit" ≈>Choose Another Character</a>
         </div>
 
         </div> 
 
       <!--  Friend  character div -->
         <div id="chInfo" class="large-6 columns ">
+                <h2 class="violet text-center">Character Stats:</h2>
+        <h3 class="violet text-center"><%= fgamerTag %></h3>
+        <br>
+
             <form action="/back" method="Get">
-                <input type=""  id="fmageIcon1" class="blah" name="character" value="0" />
                 <label class='moveDown' for="fimageIcon1">
                     <div class="imageBorder">
                         <img class="backgroundPath1" src="http://www.bungie.net<%= fcharacter['emblemPath'] %>" width="61px">
@@ -169,7 +170,7 @@
           
         
 
-    <div id="chInfo2" class="large-6 columns">
+    <div id="chInfo2" class="large-10 columns">
                 <div class="panel">
         <ul>
             <li><strong>Defense:</strong> <%= fcharacter['characterBase']['stats']['STAT_DEFENSE']['value'] %></li>
@@ -208,6 +209,16 @@
 
 
     </div> <!-- End of Row -->
+    <div class="row">
+        <div class="large-6 columns">
+            <progress value="22" max="100"></progress>
+        </div>
+        <div class="large-6 columns">
+            <progress value="22" max="100"></progress>
+        </div>
+
+        
+    </div>
 </div>
 
     
