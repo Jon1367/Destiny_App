@@ -314,14 +314,10 @@ async.parallel({
 		 var hashItem = result['data']['characters'][cOne]['characterBase']["peerView"]['equipment'];
 		 var unHashItem =   result['definitions']['items'];
 
-  setTimeout(function(){
-    // It's been 3 seconds, alert via callback
-	console.log('==============  Timeout ==============');
 
  		callback(null, result);
 
-    callback();
-  }, 3000);
+ 
 
  		}
 

@@ -1,11 +1,14 @@
 // ============  Angular ===========
-var app = angular.module("destinyApp", ["firebase"]);
+var app = angular.module("destinyApp", ["firebase"])
+.run(function($rootScope) {
+    $rootScope.user  = '';
+});
 
 
 
 
-app.controller("AuthCtrl", ["$scope", "$firebaseObject","$firebaseAuth",
-  function($scope,$firebaseObject ,$firebaseAuth) {
+app.controller("AuthCtrl", ["$scope", "$rootScope" ,"$firebaseObject","$firebaseAuth",
+  function($scope, $rootScope ,$firebaseObject ,$firebaseAuth) {
 	var ref = new Firebase("https://destinyapp.firebaseio.com/");
 
 
@@ -24,6 +27,7 @@ app.controller("AuthCtrl", ["$scope", "$firebaseObject","$firebaseAuth",
 		}).then(function(data) {
 		  	$scope.userShow=1;
 		  	$scope.userData = data;
+		  	$rootScope.user = data.password.email;
 		    console.log("Authenticated successfully with payload:", data);
 		  }).catch(function(error){
 		  	console.log(error);
@@ -31,8 +35,8 @@ app.controller("AuthCtrl", ["$scope", "$firebaseObject","$firebaseAuth",
     };
   }
 ]);
-app.controller("chatCtrl", ["$scope", "$firebaseArray",
-        function($scope, $firebaseArray) {
+app.controller("chatCtrl", ["$scope", "$rootScope", "$firebaseArray", 
+        function($scope, $rootScope, $firebaseArray) {
           //CREATE A FIREBASE REFERENCE
           var ref = new Firebase("https://destinyapp.firebaseio.com/messages");
 
@@ -46,12 +50,27 @@ app.controller("chatCtrl", ["$scope", "$firebaseArray",
             if (e.keyCode === 13 && $scope.msg) {
               //ALLOW CUSTOM OR ANONYMOUS USER NAMES
               var name = $scope.name || "anonymous";
+              console.log('root Scope');
+              console.log($scope.user);
 
-              //ADD TO FIREBASE
-              $scope.messages.$add({
+             if($scope.user === ''){
+
+            // check if logged In
+            $scope.messages.$add({
                 from: name,
                 body: $scope.msg
               });
+             }else{
+
+            $scope.messages.$add({
+                from: $scope.user,
+                body: $scope.msg
+              });
+
+
+             }
+              //ADD TO FIREBASE
+
 
               //RESET MESSAGE
               $scope.msg = "";
